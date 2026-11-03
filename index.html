@@ -365,7 +365,7 @@ body.dark .timer-actions button{background:#1e2a3c;border-color:#2a3a50;color:#a
         <summary>🤖 تنظیم هوش مصنوعی</summary>
         <div class="field">
           <label for="aiKey">کلید API گوگل جمینای (رایگان)</label>
-          <input id="aiKey" type="password" placeholder="AIza..." autocomplete="off">
+          <input id="aiKey" type="password" placeholder="AQ... یا AIza..." autocomplete="off">
           <small style="font-size:10px;color:#7c8ba0;display:block;margin-top:4px">از <a href="https://aistudio.google.com/apikey" target="_blank" style="color:#2867b2">aistudio.google.com/apikey</a> بگیرید. کلید فقط در مرورگر خودتان ذخیره می‌شود.</small>
         </div>
         <button type="button" id="saveAiKey">💾 ذخیره کلید</button>
@@ -822,7 +822,7 @@ function printPlan(){
   setTimeout(()=>{try{window.print();}catch(e){toast('چاپ پشتیبانی نمی‌شود.');}},100);
 }
 
-/* ===== RTF export (ساده‌شده، بدون واترمارک مشکل‌دار) ===== */
+/* ===== RTF export ===== */
 function escRTF(s){
   if(s==null)return '';
   s=String(s);let out='';
@@ -1167,37 +1167,56 @@ function closeAIModal(){$('aiModal').classList.remove('show');}
 async function callAI(){
   const key=norm($('aiKey')?.value)||safeGet(AIKEY_KEY);
   const statusEl=$('aiStatus');
+  
   if(!key){
     statusEl.textContent='کلید API تنظیم نشده. از aistudio.google.com/apikey بگیرید (رایگان) و در بخش «تنظیم هوش مصنوعی» ذخیره کنید.';
     statusEl.className='ai-status error';
     return;
   }
+
   statusEl.textContent='⏳ در حال ارسال به Gemini…';
   statusEl.className='ai-status';
   $('aiCallBtn').disabled=true;
-  try{
-    const resp=await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key='+encodeURIComponent(key),{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({contents:[{parts:[{text:buildAIPrompt()}]}]})
+
+  try {
+    const resp = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-goog-api-key': key 
+      },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: buildAIPrompt() }] }]
+      })
     });
-    if(!resp.ok){
-      const err=await resp.text();
-      throw new Error('HTTP '+resp.status+' — '+err.slice(0,200));
+
+    if (!resp.ok) {
+      if (resp.status === 400) throw new Error('درخواست نامعتبر است (400). متن پرامپت را بررسی کنید.');
+      if (resp.status === 401) throw new Error('کلید API نامعتبر است (401). کلید را دوباره بررسی کنید.');
+      if (resp.status === 403) throw new Error('دسترسی ممنوع است (403). ممکن است کلید شما محدودیت داشته باشد.');
+      if (resp.status === 429) throw new Error('محدودیت درخواست (429). تعداد درخواست‌ها زیاد است، کمی صبر کنید.');
+      if (resp.status === 503) throw new Error('سرور گوگل شلوغ است (503). لطفاً چند دقیقه دیگر دوباره تلاش کنید.');
+      
+      const err = await resp.text();
+      throw new Error('HTTP ' + resp.status + ' — ' + err.slice(0, 100));
     }
-    const data=await resp.json();
-    const text=data?.candidates?.[0]?.content?.parts?.[0]?.text;
-    if(!text)throw new Error('پاسخ خالی');
-    $('aiResult').value=text;
-    $('aiResultWrap').style.display='block';
-    $('aiApplyBtn').style.display='inline-block';
-    statusEl.textContent='✅ پاسخ دریافت شد. می‌توانید کپی کنید یا در یادداشت‌ها ذخیره کنید.';
-    statusEl.className='ai-status success';
-  }catch(e){
-    statusEl.textContent='❌ خطا: '+e.message+' — می‌توانید پرامپت را کپی و در ChatGPT/Gemini استفاده کنید.';
-    statusEl.className='ai-status error';
-  }finally{
-    $('aiCallBtn').disabled=false;
+
+    const data = await resp.json();
+    const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+    
+    if(!text) throw new Error('پاسخی از سمت گوگل دریافت نشد.');
+    
+    $('aiResult').value = text;
+    $('aiResultWrap').style.display = 'block';
+    $('aiApplyBtn').style.display = 'inline-block';
+    statusEl.textContent = '✅ پاسخ دریافت شد. می‌توانید کپی کنید یا در یادداشت‌ها ذخیره کنید.';
+    statusEl.className = 'ai-status success';
+
+  } catch(e) {
+    statusEl.textContent = '❌ خطا: ' + e.message;
+    statusEl.className = 'ai-status error';
+  } finally {
+    $('aiCallBtn').disabled = false;
   }
 }
 function applyAIResult(){
