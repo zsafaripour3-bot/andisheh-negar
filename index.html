@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#173b68">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.json">
+<title>اندیشه نگار اندیشا | دستیار طراحی درس</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap');
+:root{--navy:#173b68;--blue:#2867b2;--ink:#20304b;--muted:#6d7c92;--paper:#fff;--bg:#f2f6fc;--line:#e0e8f3;--green:#15966b;--shadow:0 14px 40px rgba(24,54,96,.09)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:'Vazirmatn',Tahoma,sans-serif;background:radial-gradient(circle at 5% 5%,rgba(76,201,216,.12),transparent 27%),radial-gradient(circle at 95% 10%,rgba(120,86,216,.10),transparent 25%),var(--bg);color:var(--ink);line-height:1.9;transition:background .3s,color .3s}
+input,textarea,select,[contenteditable="true"]{-webkit-user-select:text;user-select:text}
+button,input,select,textarea{font:inherit}button{cursor:pointer}a{color:inherit}
+.container{width:min(1120px,92%);margin:auto}
+.hero{position:relative;overflow:hidden;padding:32px 0 40px;color:white;background:linear-gradient(125deg,#142d52,#205b92 65%,#337eab)}
+.hero:before,.hero:after{content:"";position:absolute;border-radius:50%;border:1px solid rgba(255,255,255,.13);pointer-events:none}
+.hero:before{width:310px;height:310px;left:-100px;top:-170px}
+.hero:after{width:220px;height:220px;right:-95px;bottom:-135px}
+.hero-content{position:relative;z-index:1}
+.topline{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+.brand{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:700;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);padding:7px 13px;border-radius:30px}
+.brand-icon{display:grid;place-items:center;width:35px;height:35px;border-radius:12px;background:linear-gradient(135deg,#65e3df,#b3f5ec);color:#173b68;font-size:21px;font-weight:900}
+.top-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.top-link{text-decoration:none;font-size:12px;font-weight:700;padding:8px 13px;border-radius:25px;border:1px solid rgba(255,255,255,.35);transition:.2s;color:white}
+.top-link:hover{background:rgba(255,255,255,.12)}
+.dark-toggle,.pwa-btn{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.35);color:white;border-radius:25px;padding:8px 13px;font-size:12px;font-weight:700;transition:.2s}
+.dark-toggle:hover,.pwa-btn:hover{background:rgba(255,255,255,.18)}
+.hero h1{font-size:clamp(30px,5vw,47px);line-height:1.45;margin:0 0 8px;font-weight:900}
+.grad{color:#8ff2e8;text-shadow:0 4px 25px rgba(76,201,216,.2)}
+.hero p{max-width:670px;margin:0;color:#e1edfa;font-size:15px}
+.hero-pills{display:flex;gap:9px;flex-wrap:wrap;margin-top:20px}
+.pill{font-size:12px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.08);border-radius:25px;padding:5px 12px}
+.creator-badge{display:inline-block;margin:14px 0 0;padding:4px 13px;border:1px solid rgba(255,255,255,.4);border-radius:30px;background:rgba(255,255,255,.1);font-size:12px;font-weight:700}
+main{padding:26px 0 50px}
+.layout{display:grid;grid-template-columns:360px minmax(0,1fr);gap:22px;align-items:start}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);overflow:hidden;transition:background .3s,border-color .3s}
+.panel-head{padding:18px 22px 12px;border-bottom:1px solid var(--line)}
+.panel-head h2{font-size:17px;margin:0 0 4px;color:var(--navy)}
+.panel-head p{font-size:12px;color:var(--muted);margin:0}
+.panel-body{padding:18px 20px}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:12px;font-weight:800;margin-bottom:6px;color:#344663}
+.field input,.field select,.field textarea{display:block;width:100%;min-width:0;border:1px solid #dce5f1;background:#fbfdff;color:var(--ink);border-radius:11px;padding:10px 12px;outline:none;transition:.2s}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:#5a9ee4;box-shadow:0 0 0 3px rgba(40,103,178,.1);background:white}
+.field textarea{resize:vertical;min-height:70px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:11px}
+.custom-input{margin-top:6px;display:none}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:18px}
+.btn{border:0;border-radius:12px;padding:11px 14px;font-weight:800;font-size:13px;transition:transform .18s,filter .18s}
+.btn:hover{filter:brightness(1.04);transform:translateY(-1px)}
+.btn-primary{color:white;background:linear-gradient(120deg,#2867b2,#4a8de0);box-shadow:0 7px 17px #2867b225}
+.btn-secondary{color:#31527c;background:#edf4fc;border:1px solid #dbe7f7}
+.btn-green{color:white;background:linear-gradient(120deg,#13865f,#21b78b)}
+.btn-amber{color:white;background:linear-gradient(120deg,#c98a1a,#e0a53a)}
+.btn-purple{color:white;background:linear-gradient(120deg,#7856d8,#9578e3)}
+.btn-dark{color:white;background:linear-gradient(120deg,#2c3e50,#4a5b6e)}
+.btn-ai{color:white;background:linear-gradient(120deg,#7c3aed,#a855f7);box-shadow:0 7px 17px #7c3aed25}
+.btn-wide{grid-column:1/-1}
+.status{font-size:11px;color:var(--green);margin-top:10px;min-height:18px}
+.status.error{color:#b3261e}
+.autosave-tag{position:fixed;bottom:14px;left:14px;font-size:10px;color:#15966b;background:#e8f7ef;border:1px solid #b7e6cd;border-radius:20px;padding:4px 10px;opacity:0;transition:opacity .3s;z-index:100}
+.autosave-tag.show{opacity:1}
+.output-toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:14px 18px;border-bottom:1px solid var(--line);background:#fbfdff}
+.output-toolbar strong{font-size:14px;color:var(--navy)}
+.toolbar-actions{display:flex;gap:7px;flex-wrap:wrap}
+.toolbar-actions .btn{padding:7px 11px;font-size:11px}
+.document{padding:22px;min-height:600px}
+.empty{min-height:420px;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--muted);padding:30px}
+.empty-icon{font-size:48px;margin-bottom:10px}
+.empty h3{color:var(--navy);margin:0 0 7px}
+.empty p{font-size:13px;max-width:360px;margin:auto}
+.templates-box,.creator-box,.bank-box,.profiles-box,.backup-box,.ai-box{margin-top:14px;border:1px dashed #cfdce8;border-radius:11px;padding:9px 12px;font-size:12px;color:#506779;background:#fafcff}
+.templates-box summary,.creator-box summary,.bank-box summary,.profiles-box summary,.backup-box summary,.ai-box summary{cursor:pointer;font-weight:700;color:#2867b2;outline:none;padding:2px 0}
+.templates-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:9px}
+.tpl-btn{border:1px solid #dbe7f7;background:white;color:#31527c;border-radius:9px;padding:8px;font-size:11px;font-weight:700;text-align:center;cursor:pointer;transition:.2s}
+.tpl-btn:hover{background:#edf4fc;border-color:#5a9ee4;transform:translateY(-1px)}
+.tpl-btn .tpl-emoji{display:block;font-size:20px;margin-bottom:3px}
+.creator-box .field,.profiles-box .field,.ai-box .field{margin-top:9px}
+.creator-box button,.profiles-box button,.bank-box button,.backup-box button,.ai-box button{margin-top:7px;border:1px solid #dbe7f7;background:white;color:#31527c;border-radius:8px;padding:6px 10px;font-size:11px;font-weight:700;cursor:pointer}
+.backup-actions{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}
+.backup-actions button{margin:0}
+.backup-info{font-size:10px;color:#7c8ba0;margin-top:8px;line-height:1.7}
+.bank-list,.profile-list{margin-top:10px;display:flex;flex-direction:column;gap:7px;max-height:320px;overflow-y:auto;padding:2px}
+.bank-item,.profile-item{background:white;border:1px solid #e0e8f3;border-radius:9px;padding:8px 10px;font-size:11px;display:flex;justify-content:space-between;gap:8px;align-items:center}
+.bank-item-info,.profile-item-info{flex:1;min-width:0}
+.bank-item-info b,.profile-item-info b{display:block;color:#173b68;font-size:11.5px;margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bank-item-info small,.profile-item-info small{color:#7c8ba0;font-size:10px;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bank-item-actions,.profile-item-actions{display:flex;gap:4px;flex-shrink:0}
+.bank-item-actions button,.profile-item-actions button{border:0;border-radius:6px;padding:4px 8px;font-size:10px;font-weight:700;cursor:pointer}
+.bank-load,.profile-load{background:#e9f2fd;color:#2867b2}
+.bank-del,.profile-del{background:#fcebe9;color:#b3261e}
+.bank-empty,.profile-empty{text-align:center;color:#7c8ba0;font-size:11px;padding:12px}
+.bank-actions,.profile-actions{margin-top:8px;display:flex;justify-content:flex-end;gap:6px}
+.bank-clear,.profile-clear{border:1px solid #f0d4d1;background:#fff;color:#b3261e;border-radius:8px;padding:5px 10px;font-size:10px;font-weight:700;cursor:pointer}
+.profile-add{border:1px solid #cde2d1;background:#f0faf5;color:#15966b;border-radius:8px;padding:5px 10px;font-size:10px;font-weight:700;cursor:pointer}
+.timer-box{margin-top:12px;background:linear-gradient(135deg,#f8fbff,#f0f8ff);border:1px solid #dce8f4;border-radius:12px;padding:11px 13px}
+.timer-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px}
+.timer-header strong{font-size:12px;color:#2867b2}
+.timer-display{font-family:'Vazirmatn',monospace;font-size:15px;font-weight:900;color:#173b68;letter-spacing:1px}
+.timer-bar{height:7px;background:#e0e8f3;border-radius:4px;overflow:hidden;margin-bottom:8px}
+.timer-fill{height:100%;background:linear-gradient(90deg,#13865f,#21b78b);border-radius:4px;transition:width .3s,background .3s;width:0%}
+.timer-actions{display:flex;gap:6px}
+.timer-actions button{flex:1;border:1px solid #dbe7f7;background:white;color:#31527c;border-radius:8px;padding:6px;font-size:11px;font-weight:700;cursor:pointer}
+.lesson{--l-primary:#2867b2;--l-dark:#173b68;--l-light:#edf5ff;--l-border:#2d679e;--l-text:#194a7b;--l-even:#fbfdff;--l-info:#f7fbff;background:white;color:#263650;font-size:13px;line-height:2;max-width:210mm;margin:0 auto}
+.lesson-header{text-align:center;padding:20px 15px 18px;border:2px solid var(--l-border);border-radius:15px;margin-bottom:20px;background:linear-gradient(135deg,var(--l-light),#f5fffe)}
+.lesson-logo{display:inline-block;color:var(--l-primary);border:1px solid var(--l-border);padding:3px 14px;border-radius:30px;font-size:10.5px;font-weight:800;margin-bottom:8px;background:white}
+.lesson-logo strong{color:var(--l-primary);font-weight:900}
+.lesson-header h2{margin:3px 0 4px;color:var(--l-dark);font-size:24px}
+.lesson-header p{margin:0;color:#647993;font-size:12px}
+.meta-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px;text-align:right}
+.meta-item{padding:7px 9px;background:white;border:1px solid var(--l-border);border-radius:8px;font-size:11px}
+.meta-item b{display:block;color:var(--l-text);font-size:10px;font-weight:700}
+.lesson-section{margin:18px 0}
+.lesson-section h3{display:flex;align-items:center;gap:8px;background:var(--l-light);border-right:4px solid var(--l-primary);color:var(--l-text);font-size:14px;padding:7px 11px;border-radius:6px;margin:0 0 9px}
+.lesson-section h3 .num{display:inline-grid;place-items:center;width:23px;height:23px;border-radius:7px;background:var(--l-primary);color:white;font-size:11px}
+.lesson-section p{margin:7px 0}
+.lesson-section ul,.lesson-section ol{padding-right:23px;margin:7px 0}
+.lesson-section li{padding:2px 0}
+.info-box{background:var(--l-info);border:1px dashed var(--l-border);padding:10px 13px;border-radius:9px;margin:9px 0}
+.lesson-table{width:100%;border-collapse:collapse;font-size:11px}
+.lesson-table th,.lesson-table td{border:1px solid var(--l-border);padding:7px 8px;vertical-align:top;text-align:right}
+.lesson-table th{background:var(--l-light);color:var(--l-text)}
+.lesson-table tr:nth-child(even) td{background:var(--l-even)}
+.objective-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.objective-card{border:1px solid var(--l-border);border-radius:7px;padding:9px 10px;font-size:12px;background:var(--l-even)}
+.objective-card strong{display:block;color:var(--l-primary);margin-bottom:4px;font-size:11.5px}
+.bloom-list{list-style:none;padding:0;margin:7px 0}
+.bloom-list li{padding:7px 10px;background:#fbfdff;border:1px solid #e0e8f3;border-radius:7px;margin-bottom:6px;font-size:12px;display:flex;gap:8px;align-items:flex-start}
+.bloom-list li .bt{flex-shrink:0;margin-top:3px}
+.bloom-tag{display:inline-block;font-size:9.5px;font-weight:800;padding:1px 8px;border-radius:10px;margin-right:6px;border:1px solid;vertical-align:middle}
+.bloom-list .bloom-select{border:1px solid var(--l-border);background:white;border-radius:6px;padding:2px 6px;font-size:10px;font-family:inherit;color:var(--l-text);cursor:pointer;flex-shrink:0}
+.rubric-table{width:100%;border-collapse:collapse;font-size:11px;margin-top:8px}
+.rubric-table th,.rubric-table td{border:1px solid var(--l-border,#2d679e);padding:7px 8px;text-align:right;vertical-align:top}
+.rubric-table th{background:var(--l-light,#edf5ff);color:var(--l-text,#194a7b);font-weight:700}
+.rubric-table td:first-child{font-weight:700;background:var(--l-even,#fbfdff);width:18%}
+.session-divider{margin:24px 0 12px;border-top:3px double var(--l-primary,#2867b2);padding-top:8px}
+.session-header{background:var(--l-light,#edf5ff);border:2px solid var(--l-border,#2d679e);border-radius:12px;padding:12px 16px;margin-bottom:16px;text-align:center}
+.session-header h3{margin:0;color:var(--l-dark,#173b68);font-size:18px}
+.session-header p{margin:4px 0 0;color:#506779;font-size:11.5px}
+.session-header .brand-mini{font-size:9.5px;color:var(--l-primary);font-weight:800;margin-bottom:4px;letter-spacing:.5px}
+.lesson-footer{text-align:center;border-top:2px solid var(--l-border);padding-top:14px;margin-top:24px;color:#647993;font-size:11px;line-height:1.9}
+.lesson-footer .brand-main{display:block;color:var(--l-primary);font-size:13px;font-weight:900;margin-bottom:2px;letter-spacing:.5px}
+.lesson-footer .brand-sub{display:block;color:var(--l-dark);font-size:11px;font-weight:700}
+.footer-sign{display:flex;justify-content:space-between;margin-top:22px;padding-top:10px;border-top:1px dashed var(--l-border);font-size:11px;color:#506779;gap:10px;flex-wrap:wrap}
+.editable-note{background:#fffbeb;border:1px solid #f2e1a4;color:#876a1c;border-radius:8px;padding:7px 10px;font-size:10px;margin-bottom:14px;text-align:center}
+[contenteditable="true"]{transition:background .15s}
+[contenteditable="true"]:hover{background:#f7fbff}
+[contenteditable="true"]:focus{outline:2px dashed var(--l-primary,#5d9ce0);outline-offset:3px;background:#fffef7}
+footer{padding:20px 0 30px;text-align:center;color:#7c8ba0;font-size:11px}
+footer a{color:#2867b2;text-decoration:none;font-weight:800}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(15px);background:#173b68;color:white;padding:10px 18px;border-radius:30px;font-size:12px;box-shadow:0 8px 25px #173b6840;opacity:0;pointer-events:none;transition:.25s;z-index:9999;max-width:90%;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+body.dark{--ink:#d8e3f0;--muted:#8a9bb0;--paper:#1e2a3c;--bg:#0f1826;--line:#2a3a50;--navy:#7fb3e3;--shadow:0 14px 40px rgba(0,0,0,.4);background:radial-gradient(circle at 5% 5%,rgba(76,201,216,.06),transparent 27%),radial-gradient(circle at 95% 10%,rgba(120,86,216,.05),transparent 25%),var(--bg)}
+body.dark .hero{background:linear-gradient(125deg,#0a1628,#142d52 65%,#1c4368)}
+body.dark .panel-head h2,body.dark .output-toolbar strong{color:#7fb3e3}
+body.dark .field label{color:#9db3ca}
+body.dark .field input,body.dark .field select,body.dark .field textarea{background:#162234;border-color:#2a3a50;color:var(--ink)}
+body.dark .output-toolbar{background:#162234;border-color:#2a3a50}
+body.dark .btn-secondary{background:#1e2a3c;color:#a8c4e0;border-color:#2a3a50}
+body.dark .templates-box,body.dark .creator-box,body.dark .bank-box,body.dark .profiles-box,body.dark .backup-box,body.dark .ai-box{background:#162234;border-color:#2a3a50;color:#a8c4e0}
+body.dark .tpl-btn{background:#1e2a3c;border-color:#2a3a50;color:#a8c4e0}
+body.dark .bank-item,body.dark .profile-item{background:#1e2a3c;border-color:#2a3a50}
+body.dark .bank-item-info b,body.dark .profile-item-info b{color:#a8c4e0}
+body.dark .document{background:#0f1826}
+body.dark .bloom-list li{background:#1a2a40;border-color:#2a3a50}
+body.dark .timer-box{background:linear-gradient(135deg,#162234,#1a2a40);border-color:#2a3a50}
+body.dark .timer-actions button{background:#1e2a3c;border-color:#2a3a50;color:#a8c4e0}
+.modal{display:none;position:fixed;inset:0;background:rgba(15,24,38,.7);z-index:10000;align-items:center;justify-content:center;padding:20px}
+.modal.show{display:flex}
+.modal-content{background:white;border-radius:16px;max-width:680px;width:100%;max-height:90vh;overflow:auto;box-shadow:0 25px 60px rgba(0,0,0,.4);display:flex;flex-direction:column}
+.modal-header{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid #e0e8f3;gap:10px}
+.modal-header h3{margin:0;font-size:16px;color:#173b68}
+.modal-close{background:transparent;border:0;font-size:24px;color:#7c8ba0;cursor:pointer;padding:0 8px}
+.modal-body{padding:16px 20px;overflow:auto;flex:1}
+.modal-body textarea{width:100%;min-height:150px;font-family:monospace;font-size:11px;border:1px solid #dce5f1;border-radius:8px;padding:10px;background:#fafcff;direction:ltr;text-align:left;resize:vertical}
+.modal-body textarea.rtl{font-family:'Vazirmatn',monospace;direction:rtl;text-align:right;font-size:12px}
+.modal-body .ai-status{padding:10px;border-radius:8px;font-size:12px;margin-top:10px;background:#f0f8ff;color:#2867b2;border:1px solid #dbe7f7}
+.modal-body .ai-status.error{background:#fef2f0;color:#b3261e;border-color:#f0d4d1}
+.modal-body .ai-status.success{background:#e8f7ef;color:#15966b;border-color:#b7e6cd}
+.modal-body .ai-key-box{display:flex;gap:8px;margin-top:8px}
+.modal-body .ai-key-box input{flex:1;border:1px solid #dce5f1;border-radius:8px;padding:8px;font-family:monospace;font-size:11px}
+.modal-body .ai-options{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px;padding:10px;background:#f7fbff;border-radius:8px;font-size:12px}
+.modal-body .ai-options label{display:flex;align-items:center;gap:6px;cursor:pointer}
+.modal-actions{display:flex;gap:8px;padding:14px 20px;border-top:1px solid #e0e8f3;flex-wrap:wrap}
+.modal-actions .btn{flex:1;min-width:120px}
+@media(max-width:850px){.layout{grid-template-columns:1fr}.form-panel{order:1}.output-panel{order:2}.document{padding:16px}.three{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.hero{padding:22px 0 30px}.hero h1{font-size:29px}.panel-head,.panel-body{padding:16px}.meta-grid{grid-template-columns:1fr 1fr}.objective-grid{grid-template-columns:1fr}.toolbar-actions{width:100%}.toolbar-actions .btn{flex:1}.three{grid-template-columns:1fr}.templates-grid{grid-template-columns:1fr}}
+.print-watermark{display:none}
+@media print{
+  @page{size:A4 portrait;margin:10mm}
+  html,body{width:100%!important;height:auto!important;margin:0!important;padding:0!important;background:#fff!important;color:#000!important;overflow:visible!important;font-family:Tahoma,sans-serif!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .print-watermark{display:flex!important;flex-direction:column;align-items:center;justify-content:center;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-30deg);opacity:0.06;pointer-events:none;z-index:0;text-align:center;white-space:nowrap}
+  .print-watermark .wm-brand{font-size:80pt;font-weight:900;line-height:1;letter-spacing:4px;color:#2867b2}
+  .print-watermark .wm-url{font-size:16pt;font-weight:700;margin-top:14pt;letter-spacing:2px;color:#173b68;opacity:0.7}
+  .hero,.form-panel,.output-toolbar,footer,.editable-note,.toast,.modal,.autosave-tag{display:none!important}
+  main,main>.container,.layout{display:block!important;width:100%!important;max-width:none!important;margin:0!important;padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important}
+  .output-panel,.document{display:block!important;width:100%!important;max-width:none!important;min-height:0!important;margin:0!important;padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important}
+  .lesson{display:block!important;width:100%!important;max-width:none!important;color:#111!important;background:transparent!important;font-family:Tahoma,sans-serif!important;font-size:10pt!important;line-height:1.6!important}
+  .lesson-header{background:var(--l-light)!important;border:1.5pt solid var(--l-border)!important;border-radius:8px!important;padding:12px!important;margin-bottom:14px!important;break-inside:avoid}
+  .meta-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:5px!important}
+  .meta-item{padding:5px!important;font-size:9pt!important;border-color:var(--l-border)!important}
+  .lesson-table,.rubric-table{font-size:8.5pt!important;width:100%!important;table-layout:fixed;word-break:break-word}
+  .lesson-table thead,.rubric-table thead{display:table-header-group}
+  .lesson-table tr,.rubric-table tr{break-inside:avoid;page-break-inside:avoid}
+  [contenteditable]:hover,[contenteditable]:focus{background:transparent!important;outline:none!important}
+  .bloom-select{display:none!important}
+}
+</style>
+</head>
+<body>
+
+<div class="print-watermark" aria-hidden="true">
+  <div class="wm-brand">آکادمی اندیشا</div>
+  <div class="wm-url">eitaa.com/Andeesha</div>
+</div>
+
+<div class="autosave-tag" id="autosaveTag">✓ ذخیره شد</div>
+
+<header class="hero">
+  <div class="container hero-content">
+    <div class="topline">
+      <div class="brand"><span class="brand-icon">ا</span><span>اندیشه نگار اندیشا · آکادمی اندیشا</span></div>
+      <div class="top-actions">
+        <button type="button" class="dark-toggle" id="darkToggle">🌙 شب</button>
+        <button type="button" class="pwa-btn" id="pwaInstallBtn" style="display:none">📱 نصب اپ</button>
+        <a class="top-link" href="https://eitaa.com/Andeesha" target="_blank" rel="noopener">ایتا ↗</a>
+      </div>
+    </div>
+    <h1>اندیشه نگار <span class="grad">اندیشا</span> <span style="font-size:.5em;opacity:.7">v2</span></h1>
+    <p>دستیار هوشمند طرح درس برای معلمان — با AI، قالب‌های آماده، PWA و خروجی Word.</p>
+    <div class="hero-pills">
+      <span class="pill">🤖 AI Gemini</span><span class="pill">🎨 ۶ قالب آماده</span>
+      <span class="pill">📱 PWA</span><span class="pill">💾 Autosave</span>
+      <span class="pill">🏷️ بلوم دستی</span><span class="pill">📤 Word RTF</span>
+      <span class="pill">🌙 شب</span>
+    </div>
+    <div class="creator-badge" id="creatorBadge">طراحی و توسعه: زهرا صفری پور</div>
+  </div>
+</header>
+
+<main>
+<div class="container">
+<div class="layout">
+
+<section class="panel form-panel">
+  <div class="panel-head">
+    <h2>🎛 مشخصات درس</h2>
+    <p>اطلاعات را وارد کنید؛ طرح درس خودکار ساخته می‌شود.</p>
+  </div>
+  <div class="panel-body">
+    <form id="lessonForm">
+
+      <details class="templates-box" open>
+        <summary>🎨 قالب‌های آماده (۶ درس رایج)</summary>
+        <div class="templates-grid">
+          <button type="button" class="tpl-btn" data-tpl="math"><span class="tpl-emoji">📐</span>ریاضی</button>
+          <button type="button" class="tpl-btn" data-tpl="science"><span class="tpl-emoji">🔬</span>علوم</button>
+          <button type="button" class="tpl-btn" data-tpl="lit"><span class="tpl-emoji">📖</span>فارسی</button>
+          <button type="button" class="tpl-btn" data-tpl="social"><span class="tpl-emoji">🌍</span>مطالعات</button>
+          <button type="button" class="tpl-btn" data-tpl="lang"><span class="tpl-emoji">🔤</span>انگلیسی</button>
+          <button type="button" class="tpl-btn" data-tpl="religion"><span class="tpl-emoji">🕌</span>دینی</button>
+        </div>
+      </details>
+
+      <div class="field">
+        <label for="subject">نام درس / حوزه</label>
+        <select id="subject">
+          <option value="">— انتخاب کنید —</option>
+          <optgroup label="عمومی">
+            <option>علوم تجربی</option><option>ریاضی</option><option>فارسی</option><option>نگارش</option>
+            <option>مطالعات اجتماعی</option><option>دینی و قرآن</option><option>هدیه‌های آسمان</option>
+            <option>زبان انگلیسی</option><option>عربی</option><option>هنر</option><option>تربیت بدنی</option>
+            <option>تفکر و پژوهش</option><option>کار و فناوری</option>
+          </optgroup>
+          <optgroup label="متوسطه">
+            <option>فیزیک</option><option>شیمی</option><option>زیست‌شناسی</option><option>هندسه</option>
+            <option>ادبیات</option><option>تاریخ</option><option>جغرافیا</option><option>رایانه</option>
+          </optgroup>
+          <option value="__custom__">➕ سایر</option>
+        </select>
+        <input id="subjectCustom" class="custom-input" type="text" placeholder="نام درس">
+      </div>
+
+      <div class="two">
+        <div class="field">
+          <label for="grade">پایه تحصیلی</label>
+          <select id="grade">
+            <option value="">— انتخاب کنید —</option>
+            <optgroup label="ابتدایی">
+              <option>اول ابتدایی</option><option>دوم ابتدایی</option><option>سوم ابتدایی</option>
+              <option>چهارم ابتدایی</option><option>پنجم ابتدایی</option><option>ششم ابتدایی</option>
+            </optgroup>
+            <optgroup label="متوسطه اول"><option>هفتم</option><option>هشتم</option><option>نهم</option></optgroup>
+            <optgroup label="متوسطه دوم">
+              <option>دهم تجربی</option><option>دهم ریاضی</option><option>دهم انسانی</option>
+              <option>یازدهم تجربی</option><option>یازدهم ریاضی</option><option>یازدهم انسانی</option>
+              <option>دوازدهم تجربی</option><option>دوازدهم ریاضی</option><option>دوازدهم انسانی</option>
+            </optgroup>
+            <option value="__custom__">➕ سایر</option>
+          </select>
+          <input id="gradeCustom" class="custom-input" type="text" placeholder="پایه">
+        </div>
+        <div class="field"><label for="duration">مدت جلسه (دقیقه)</label><input id="duration" type="number" min="20" max="240" step="5" value="45"></div>
+      </div>
+
+      <div class="field"><label for="topic">موضوع / عنوان مبحث</label><input id="topic" placeholder="مثلاً کسر، فرهنگ بومی" required></div>
+
+      <div class="three">
+        <div class="field"><label for="sessions">تعداد جلسات</label><input id="sessions" type="number" min="1" max="10" value="1"></div>
+        <div class="field"><label for="date">تاریخ اجرا</label><input id="date" type="text" placeholder="۱۴۰۵/۰۷/۱۹"></div>
+        <div class="field"><label for="students">دانش‌آموزان</label><input id="students" type="number" min="1" max="100" value="30"></div>
+      </div>
+
+      <div class="field"><label for="teacher">نام دبیر</label><input id="teacher" placeholder="نام و نام خانوادگی"></div>
+      <div class="field"><label for="school">نام مدرسه</label><input id="school" placeholder="نام مدرسه"></div>
+
+      <div class="field">
+        <label for="approach">روش اصلی تدریس</label>
+        <select id="approach">
+          <option value="">— خودکار —</option>
+          <option value="ترکیبی">ترکیبی و فعال</option><option value="پرسش و پاسخ">پرسش و پاسخ</option>
+          <option value="اکتشافی">اکتشافی</option><option value="بحث گروهی">بحث گروهی</option>
+          <option value="یادگیری مشارکتی">یادگیری مشارکتی</option><option value="نمایش عملی">نمایش عملی</option>
+          <option value="حل مسئله">حل مسئله</option><option value="بازی آموزشی">بازی آموزشی</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="theme">🎨 تم رنگی برگه</label>
+        <select id="theme">
+          <option value="blue">آبی رسمی</option><option value="green">سبز آرام</option>
+          <option value="purple">بنفش</option><option value="orange">نارنجی</option>
+          <option value="gray">خاکستری</option><option value="red">قرمز</option>
+        </select>
+      </div>
+
+      <div class="field"><label for="materials">وسایل و رسانه‌ها</label><textarea id="materials" placeholder="خالی = خودکار"></textarea></div>
+      <div class="field"><label for="prior">دانسته‌های قبلی</label><textarea id="prior" placeholder="خالی = خودکار"></textarea></div>
+      <div class="field"><label for="notes">توضیحات ویژه</label><textarea id="notes" placeholder="هر نکته‌ای..."></textarea></div>
+
+      <div class="actions">
+        <button type="submit" class="btn btn-primary btn-wide">🚀 تولید خودکار طرح درس</button>
+        <button type="button" id="aiBtn" class="btn btn-ai btn-wide">🤖 تولید هوشمند با AI</button>
+        <button type="button" id="printBtn" class="btn btn-green">🖨️ چاپ / PDF</button>
+        <button type="button" id="wordBtn" class="btn btn-purple">📤 Word RTF</button>
+        <button type="button" id="copyBtn" class="btn btn-secondary">📋 کپی متن</button>
+        <button type="button" id="shareBtn" class="btn btn-dark">🔗 لینک اشتراک</button>
+        <button type="button" id="saveBankBtn" class="btn btn-amber">💾 ذخیره در بانک</button>
+        <button type="button" id="clearBtn" class="btn btn-secondary">🧹 پاک‌سازی</button>
+      </div>
+      <div id="status" class="status" role="status" aria-live="polite"></div>
+
+      <div class="timer-box" id="timerBox">
+        <div class="timer-header"><strong>⏱ زمان‌سنج</strong><span class="timer-display" id="timerDisplay">۰:۰۰ / ۴۵:۰۰</span></div>
+        <div class="timer-bar"><div class="timer-fill" id="timerFill"></div></div>
+        <div class="timer-actions"><button type="button" id="timerStartPause">▶ شروع</button><button type="button" id="timerReset">↺ بازنشانی</button></div>
+      </div>
+
+      <details class="ai-box">
+        <summary>🤖 تنظیم هوش مصنوعی</summary>
+        <div class="field">
+          <label for="aiKey">کلید API گوگل جمینای (رایگان)</label>
+          <input id="aiKey" type="password" placeholder="AIza..." autocomplete="off">
+          <small style="font-size:10px;color:#7c8ba0;display:block;margin-top:4px">از <a href="https://aistudio.google.com/apikey" target="_blank" style="color:#2867b2">aistudio.google.com/apikey</a> بگیرید. کلید فقط در مرورگر خودتان ذخیره می‌شود.</small>
+        </div>
+        <button type="button" id="saveAiKey">💾 ذخیره کلید</button>
+        <button type="button" id="clearAiKey">حذف کلید</button>
+      </details>
+
+      <details class="creator-box">
+        <summary>⚙️ نام طراح</summary>
+        <div class="field"><label for="creatorName">نام طراح</label><input id="creatorName" value="زهرا صفری پور"></div>
+        <button type="button" id="saveCreator">ذخیره</button>
+      </details>
+
+      <details class="profiles-box" id="profilesBox">
+        <summary>👥 پروفایل معلمان (<span id="profileCount">۰</span>)</summary>
+        <div id="profileList" class="profile-list"><div class="profile-empty">هنوز پروفایلی ذخیره نشده است.</div></div>
+        <div class="profile-actions">
+          <button type="button" id="saveProfileBtn" class="profile-add">➕ ذخیره از فرم</button>
+          <button type="button" id="clearProfilesBtn" class="profile-clear">حذف همه</button>
+        </div>
+      </details>
+
+      <details class="bank-box" id="bankBox">
+        <summary>🗂 بانک طرح‌ها (<span id="bankCount">۰</span>)</summary>
+        <div id="bankList" class="bank-list"><div class="bank-empty">هنوز طرحی ذخیره نشده است.</div></div>
+        <div class="bank-actions"><button type="button" id="clearBankBtn" class="bank-clear">حذف همه</button></div>
+      </details>
+
+      <details class="backup-box">
+        <summary>💾 پشتیبان‌گیری</summary>
+        <div class="backup-actions">
+          <button type="button" id="exportBackupBtn">📤 خروجی</button>
+          <button type="button" id="importBackupBtn">📥 بازیابی</button>
+        </div>
+        <input type="file" id="backupFile" accept=".json" style="display:none">
+        <div class="backup-info">شامل همه طرح‌ها، پروفایل‌ها و تنظیمات</div>
+      </details>
+
+    </form>
+  </div>
+</section>
+
+<section class="panel output-panel">
+  <div class="output-toolbar">
+    <strong>📄 پیش‌نمایش زنده</strong>
+    <div class="toolbar-actions">
+      <button type="button" id="toolbarCopy" class="btn btn-secondary">📋 کپی</button>
+      <button type="button" id="toolbarSave" class="btn btn-amber">💾 ذخیره</button>
+      <button type="button" id="toolbarPrint" class="btn btn-green">🖨️ چاپ</button>
+    </div>
+  </div>
+  <div id="document" class="document">
+    <div class="empty"><div>
+      <div class="empty-icon">📘</div>
+      <h3>طرح درس اینجا نمایش داده می‌شود</h3>
+      <p>مشخصات را وارد و «تولید» را بزنید. یا از قالب‌های آماده استفاده کنید.</p>
+    </div></div>
+  </div>
+</section>
+
+</div>
+</div>
+</main>
+
+<footer>
+  <div class="container">
+    <strong>آکادمی اندیشا</strong>
+    <div id="footerCreator">طراحی و توسعه: زهرا صفری پور</div>
+    <div>آموزش هوشمند، اندیشه روشن ✦</div>
+  </div>
+</footer>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<!-- AI Modal -->
+<div class="modal" id="aiModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 id="aiTitle">🤖 دستیار هوشمند طرح درس</h3>
+      <button type="button" class="modal-close" id="aiClose">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="ai-options">
+        <label><input type="checkbox" id="aiOptionRubric" checked> روبريک</label>
+        <label><input type="checkbox" id="aiOptionBloom" checked> اهداف بلوم</label>
+        <label><input type="checkbox" id="aiOptionDiff" checked> تفاوت‌های فردی</label>
+      </div>
+      <p style="font-size:12px;color:#506779;margin:0 0 8px">پرامپت آماده — می‌توانید مستقیماً به AI بفرستید یا کپی کنید:</p>
+      <textarea id="aiPrompt" class="rtl"></textarea>
+      <div class="ai-status" id="aiStatus">آماده</div>
+      <div id="aiResultWrap" style="display:none;margin-top:12px">
+        <p style="font-size:12px;color:#15966b;font-weight:800;margin:0 0 6px">✅ پاسخ AI:</p>
+        <textarea id="aiResult" class="rtl" style="min-height:300px"></textarea>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button type="button" id="aiCallBtn" class="btn btn-ai">🚀 ارسال به AI</button>
+      <button type="button" id="aiCopyPromptBtn" class="btn btn-secondary">📋 کپی پرامپت</button>
+      <button type="button" id="aiApplyBtn" class="btn btn-green" style="display:none">✓ جایگزینی در فرم</button>
+      <button type="button" id="aiCloseBtn" class="btn btn-secondary">بستن</button>
+    </div>
+  </div>
+</div>
+
+<!-- DL Modal -->
+<div class="modal" id="dlModal">
+  <div class="modal-content">
+    <div class="modal-header"><h3 id="dlTitle">ذخیره فایل</h3><button type="button" class="modal-close" id="dlClose">×</button></div>
+    <div class="modal-body">
+      <p id="dlDesc"></p>
+      <ol id="dlSteps"></ol>
+      <textarea id="dlContent" readonly></textarea>
+    </div>
+    <div class="modal-actions">
+      <button type="button" id="dlCopy" class="btn btn-primary">📋 کپی</button>
+      <button type="button" id="dlCloseBtn" class="btn btn-secondary">بستن</button>
+    </div>
+  </div>
+</div>
+
+<script>
+'use strict';
+/* ===== Utilities ===== */
+const $=id=>document.getElementById(id);
+const norm=s=>(s===undefined||s===null)?'':String(s).trim();
+const ESC={'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'};
+const esc=s=>norm(s).replace(/[&<>"']/g,c=>ESC[c]);
+const fa=n=>String(n).replace(/[0-9]/g,d=>'۰۱۲۳۴۵۶۷۸۹'[+d]);
+const safeGet=k=>{try{return localStorage.getItem(k)}catch(e){return null}};
+const safeSet=(k,v)=>{try{v?localStorage.setItem(k,v):localStorage.removeItem(k)}catch(e){}};
+
+const DEFAULT_CREATOR='زهرا صفری پور';
+const CREATOR_KEY='andisheCreator_v2';
+const DARK_KEY='andisheDark_v2';
+const BANK_KEY='andisheBank_v2';
+const PROFILES_KEY='andisheProfiles_v2';
+const AUTOSAVE_KEY='andisheAutosave_v2';
+const AIKEY_KEY='andisheAiKey_v2';
+const BANK_MAX=50;
+
+function toast(m){const t=$('toast');if(!t)return;t.textContent=m;t.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove('show'),3500);}
+function setStatus(m,e){const s=$('status');if(s){s.textContent=norm(m);s.className='status'+(e?' error':'');}}
+
+/* ===== Themes ===== */
+const THEMES={
+  blue:{primary:'#2867b2',dark:'#173b68',light:'#edf5ff',border:'#2d679e',text:'#194a7b',even:'#fbfdff',info:'#f7fbff'},
+  green:{primary:'#15966b',dark:'#0f5f43',light:'#e9f7f2',border:'#15805c',text:'#0f5f43',even:'#fbfffd',info:'#f2fbf7'},
+  purple:{primary:'#7856d8',dark:'#4a3296',light:'#f0ecfc',border:'#5d3fc0',text:'#3d2884',even:'#fcfbff',info:'#f6f2ff'},
+  orange:{primary:'#e07c22',dark:'#9c5411',light:'#fdf1e6',border:'#b86317',text:'#7d430e',even:'#fffdfb',info:'#fff8f1'},
+  gray:{primary:'#4a5b6e',dark:'#2b3745',light:'#eef1f5',border:'#3a4757',text:'#2b3745',even:'#fcfdff',info:'#f6f8fb'},
+  red:{primary:'#c0392b',dark:'#7d2018',light:'#fcebe9',border:'#a02a1e',text:'#6b1b14',even:'#fffbfb',info:'#fdf2f1'}
+};
+function applyTheme(k){
+  const t=THEMES[k]||THEMES.blue,l=$('lessonContent');if(!l)return;
+  Object.entries({primary:'--l-primary',dark:'--l-dark',light:'--l-light',border:'--l-border',text:'--l-text',even:'--l-even',info:'--l-info'}).forEach(([key,val])=>l.style.setProperty(val,t[key]));
+}
+
+/* ===== Bloom ===== */
+const BLOOM=[
+  {key:'remember',label:'یادآوری',color:'#15966b'},{key:'understand',label:'درک',color:'#2867b2'},
+  {key:'apply',label:'کاربرد',color:'#e0a53a'},{key:'analyze',label:'تحلیل',color:'#e07c22'},
+  {key:'evaluate',label:'ارزشیابی',color:'#c0392b'},{key:'create',label:'آفرینش',color:'#7856d8'}
+];
+const bloomInfo=k=>BLOOM.find(b=>b.key===k)||BLOOM[1];
+function detectBloom(t){
+  if(/نام می‌برد|فهرست|تعریف|شناسایی|نشان/.test(t))return 'remember';
+  if(/توضیح|تشریح|بیان|خلاصه|تفسیر|شرح/.test(t))return 'understand';
+  if(/حل|به کار می‌برد|اجرا|محاسبه|کاربرد|استفاده/.test(t))return 'apply';
+  if(/تحلیل|دسته‌بندی|تمایز|سازمان|پیوند|مقایسه/.test(t))return 'analyze';
+  if(/ارزشیابی|داوری|نقد|ارزیابی|دفاع|دلیل/.test(t))return 'evaluate';
+  if(/طراحی|خلق|ساخت|تولید|پیشنهاد|تدوین|ابداع/.test(t))return 'create';
+  return 'understand';
+}
+function bloomTag(k){const b=bloomInfo(k);return `<span class="bloom-tag" style="color:${b.color};border-color:${b.color};background:${b.color}18">${esc(b.label)}</span>`;}
+function bloomSelect(current){
+  let h='<select class="bloom-select" data-bloom>';
+  BLOOM.forEach(b=>h+=`<option value="${b.key}" ${b.key===current?'selected':''}>${b.label}</option>`);
+  return h+'</select>';
+}
+
+/* ===== Word categories ===== */
+const WORDS={
+  math:{match:/ریاضی|جبر|اتحاد|معادله|تابع|هندسه|مثلث|زاویه|کسر|عدد|احتمال|آمار|توان|ریشه|مساحت|حجم|بردار|مثلثات|لگاریتم|دایره/i,prereq:'درک مفهوم عدد و نمادهای پایه، انجام محاسبات ساده.',method:'حل مسئله، آموزش اکتشافی، الگویابی و تمرین دونفره',tools:'تخته، کارت سؤال، برگه فعالیت، ابزار هندسی',question:'یک نمونه ساده از مفهوم مرتبط را حل کنید و راهبرد خود را توضیح دهید.',activity:'دانش‌آموزان الگوها را کشف می‌کنند؛ راه‌حل خود را ارائه و مقایسه می‌کنند.',assessment:'حل تمرین انتقالی و توضیح گام‌های حل'},
+  science:{match:/علوم|فیزیک|نیوتن|حرکت|نیرو|انرژی|سرعت|الکتری|مغناطیس|شیمی|اتم|مولکول|واکنش|اسید|زیست|تنفس|سلول|بدن|گیاه|اکوسیستم|آزمایش|دما|گرما|نور|موج/i,prereq:'مشاهده پدیده‌های روزمره، واژگان پایه علمی و رعایت نکات ایمنی.',method:'پرسش‌محوری، پیش‌بینی-آزمایش-تبیین، مشاهده و گفت‌وگو',tools:'تصویر یا شبیه‌ساز، وسایل ساده آزمایش، برگه ثبت مشاهده',question:'در زندگی روزمره کجا با پدیده‌ای مرتبط روبه‌رو شده‌اید؟',activity:'گروه‌ها پیش‌بینی می‌نویسند، آزمایش ساده را انجام و شواهد را ثبت می‌کنند.',assessment:'تفسیر مشاهده تازه، بیان رابطه علت و معلولی'},
+  lit:{match:/فارسی|ادبیات|شعر|نثر|تشبیه|استعاره|آرایه|دستور|فعل|فاعل|مفعول|واژگان|داستان|نگارش|املاء|انشا|حکایت/i,prereq:'خواندن روان متن، آشنایی با معنای واژه‌ها در بافت.',method:'خوانش فعال، گفت‌وگوی ادبی، بارش فکری و تحلیل نمونه',tools:'متن درس، کارت واژه، تخته، برگه تحلیل',question:'از متن یا شعر آشنایی نمونه‌ای از کاربرد هنری زبان به یاد دارید؟',activity:'گروه‌ها نمونه‌های متن را می‌خوانند، نشانه‌های زبانی را مشخص و برداشت را توضیح می‌دهند.',assessment:'شناسایی نمونه در متن جدید و توضیح نقش آن'},
+  social:{match:/مطالعات|تاریخ|جغرافیا|اجتماع|مدنی|نقشه|جمعیت|منابع|فرهنگ|تمدن|قانون|شهروند|اقتصاد/i,prereq:'پیوند موضوع با تجربه‌های اجتماعی و محیط پیرامون.',method:'بحث گروهی، کاوش در نقشه/سند و یادگیری مشارکتی',tools:'نقشه یا تصویر، سند کوتاه، کتاب درسی و تخته',question:'این موضوع چه ارتباطی با زندگی محلی یا تجربه روزمره دارد؟',activity:'گروه‌ها نقشه، سند یا موقعیت واقعی را بررسی و نتیجه را ارائه می‌دهند.',assessment:'استنتاج از سند/نقشه با شاهد مشخص'},
+  lang:{match:/انگلیسی|عربی|زبان|english|arabic|vocabulary|grammar|reading|writing/i,prereq:'آشنایی با واژگان و ساختارهای پایه زبان.',method:'یادگیری ارتباطی، تکرار معنادار، الگوسازی و کار دوزبانه',tools:'فلش‌کارت، فایل صوتی، کتاب درسی، تخته',question:'کدام واژه‌ها یا جمله‌های مرتبط را می‌شناسید؟',activity:'دانش‌آموزان واژه‌ها و ساختار جدید را در گفت‌وگوی کوتاه به کار می‌برند.',assessment:'به‌کارگیری درست ساختار/واژه در گفت‌وگو'},
+  art:{match:/هنر|نقاشی|رنگ|موسیقی|خط|خوشنویسی|کار|فناوری|ورزش|تربیت بدنی|حرفه/i,prereq:'آشنایی با ابزار/فضای کار، رعایت نکات ایمنی.',method:'یادگیری عملی، نمایش نمونه، تمرین هدایت‌شده',tools:'ابزار و مواد کار، نمونه اثر، تخته، برگه تمرین',question:'چه تجربه یا نمونه‌ای از این فعالیت دیده‌اید؟',activity:'دانش‌آموزان مراحل کار را تمرین و درباره انتخاب‌های خود توضیح می‌دهند.',assessment:'اجرای مراحل مطابق معیارها و ارائه توضیح'},
+  religion:{match:/دینی|قرآن|دین|اخلاق|معارف|نماز|حدیث|سوره|توحید|هدیه/i,prereq:'آشنایی با مفاهیم و آیات/روایت‌های مقدماتی.',method:'گفت‌وگوی معنایی، پرسش و پاسخ، هم‌خوانی و پیوند با زندگی',tools:'کتاب درسی، متن آیه/حدیث، تخته، کارت ارزش‌ها',question:'این مفهوم چه پیوندی با رفتار و تجربه‌های روزمره شما دارد؟',activity:'دانش‌آموزان متن یا آیه را می‌خوانند، پیام آن را بررسی و یک مثال رفتاری می‌سازند.',assessment:'بیان پیام اصلی و ارائه یک مصداق رفتاری'}
+};
+const FALLBACK={prereq:'آشنایی مقدماتی با واژگان کلیدی و مفاهیم درس‌های پیشین.',method:'پرسش و پاسخ، یادگیری مشارکتی، بارش فکری و آموزش اکتشافی',tools:'کتاب درسی، تخته، کارت واژه/سؤال، تصویر یا محتوای چندرسانه‌ای',question:'از دانسته‌ها یا تجربه‌های قبلی خود چه ارتباطی با این موضوع پیدا می‌کنید؟',activity:'دانش‌آموزان در گروه‌های کوچک نمونه‌ها را بررسی و دسته‌بندی می‌کنند و یافته‌ها را ارائه می‌دهند.',assessment:'کاربرد مفهوم در مثال تازه و بیان دلیل یا شواهد'};
+const category=(s,t)=>{const x=(norm(s)+' '+norm(t)).toLowerCase();for(const k in WORDS)if(WORDS[k].match.test(x))return WORDS[k];return FALLBACK;};
+
+/* ===== Plan generation ===== */
+function mins(total){const t=Math.max(10,Math.min(300,total||45));const a=[Math.round(t*.10),Math.round(t*.12),Math.round(t*.48),Math.round(t*.15),0];a[4]=t-a.reduce((s,v)=>s+v,0);if(a[4]<1){a[3]-=1;a[4]+=1;}return a;}
+
+function makePlan(d){
+  const c=category(d.subject,d.topic),t=mins(d.duration);
+  const topic=d.topic||'موضوع درس',grade=d.grade||'پایه';
+  const goal=`دانش‌آموزان در پایان جلسه بتوانند مفهوم «${topic}» را در سطح متناسب با ${grade} توضیح دهند، نمونه‌های آن را تحلیل کنند و آموخته را در موقعیت تازه به کار گیرند.`;
+  const specifics=[
+    `دانشی: تعریف و توضیح واژگان و اصول کلیدی مرتبط با «${topic}».`,
+    `مهارتی: تحلیل نمونه، اجرای گام‌های مناسب و ارائه پاسخ مستدل.`,
+    `نگرشی: مشارکت مسئولانه، کنجکاوی و احترام به دیدگاه هم‌کلاسی‌ها.`
+  ];
+  const rawBehaviors=[
+    `دانش‌آموز با مشاهده مثال یا متن درس، دست‌کم ۳ مفهوم/ویژگی کلیدی «${topic}» را با حداقل ۲ مورد درست نام می‌برد.`,
+    `دانش‌آموز مفهوم «${topic}» را با زبان خود در یک تا دو جمله توضیح می‌دهد و یک مثال مرتبط می‌آورد.`,
+    `دانش‌آموز یک مسئله یا موقعیت تازه را با استفاده از «${topic}» حل یا تبیین می‌کند (حداقل ۸۰٪ دقت).`,
+    `دانش‌آموز یک نمونه مرتبط را با ذکر دست‌کم ۲ دلیل یا گام روشن تحلیل می‌کند.`,
+    `دانش‌آموز یک کاربرد، مثال یا راه‌حل تازه برای «${topic}» طراحی و برای کلاس ارائه می‌کند.`
+  ];
+  const behaviors=rawBehaviors.map(text=>({text,bloom:detectBloom(text)}));
+  const rows=[
+    ['۱','آماده‌سازی و ایجاد انگیزه',t[0],`سلام و سازمان‌دهی؛ طرح یک تصویر، مسئله یا موقعیت مرتبط با «${topic}» برای جلب توجه و بیان هدف.`,'مشارکت و بیان تجربه آغازین'],
+    ['۲','ارزشیابی ورودی',t[1],c.question+' معلم پاسخ‌ها را به پیش‌نیازها پیوند می‌دهد.','شنیدن پاسخ‌ها و تشخیص پیش‌دانسته‌ها'],
+    ['۳','فرآیند تدریس تعاملی',t[2],c.activity+' معلم مفهوم را مرحله‌به‌مرحله صورت‌بندی و بازخورد می‌دهد.','مشاهده مشارکت، گفت‌وگو و بررسی برگه فعالیت'],
+    ['۴','جمع‌بندی و تثبیت',t[3],`با نقشه مفهومی/خلاصه سه‌نکته‌ای، نکات اصلی «${topic}» مرور می‌شود.`,'بازگویی نکته کلیدی و رفع سوءبرداشت'],
+    ['۵','ارزشیابی تکوینی و تکلیف',t[4],`پاسخ فردی به پرسش پایانی: ${c.assessment}. تکلیف: یک نمونه از «${topic}» در محیط پیدا و توضیح دهید.`,'برگه خروج/پرسش پایانی؛ بررسی تکلیف جلسه بعد']
+  ];
+  return {goal,specifics,behaviors,c,rows};
+}
+
+function buildRubric(topic){
+  const isSci=/ریاضی|علوم|فیزیک|شیمی|زیست|هندسه|حساب|جبر|آمار/.test(topic);
+  return [
+    {name:'درک و توضیح مفهوم',levels:[`مفهوم «${topic}» را با زبان خود، دقیق و کامل توضیح می‌دهد و به حداقل ۲ مثال مرتبط اشاره می‌کند.`,`مفهوم را با زبان خود توضیح می‌دهد و یک مثال مرتبط می‌آورد.`,'مفهوم را با کمک معلم یا همتا توضیح می‌دهد.','در توضیح مفهوم دچار اشتباه یا ابهام جدی است.']},
+    {name:isSci?'حل مسئله و کاربرد':'کاربرد در موقعیت تازه',levels:[isSci?'مسئله‌های تازه را با راهبرد مناسب و بدون خطا حل می‌کند.':'مفهوم را در موقعیت تازه، بدون کمک و با موفقیت به کار می‌برد.',isSci?'مسئله‌های تازه را با راهنمایی اندک حل می‌کند.':'مفهوم را با راهنمایی اندک در موقعیت تازه به کار می‌برد.',isSci?'فقط مسئله‌های آشنا را با کمک حل می‌کند.':'فقط در موقعیت آشنا و با کمک، مفهوم را به کار می‌برد.',isSci?'در حل مسئله و انتقال آموخته ناتوان است.':'در انتقال آموخته به موقعیت تازه ناتوان است.']},
+    {name:'تحلیل و استدلال',levels:['نمونه‌ها را با ۳ دلیل یا شاهد مستدل تحلیل می‌کند.','نمونه‌ها را با ۲ دلیل تحلیل می‌کند.','تحلیل ناقص با یک دلیل ارائه می‌دهد.','در تحلیل و استدلال ناتوان است.']},
+    {name:'مشارکت و همکاری',levels:['مشارکت فعال و سازنده دارد و به یادگیری گروه کمک می‌کند.','در فعالیت‌های گروهی به‌طور منظم مشارکت می‌کند.','مشارکت حداقلی دارد.','از مشارکت در فعالیت‌ها پرهیز می‌کند.']}
+  ];
+}
+
+function buildSessions(d,n){
+  const topic=d.topic||'موضوع درس',sess=[];
+  for(let i=0;i<n;i++){
+    let title,focus;
+    if(n===1){title=topic;focus='جلسه‌ی کامل';}
+    else if(i===0){title='مقدمه‌ای بر '+topic;focus='آشنایی با مفهوم و ایجاد انگیزه';}
+    else if(i===n-1){title='جمع‌بندی و ارزشیابی '+topic;focus='تعمیق، ارزشیابی و تکلیف';}
+    else{title=topic+' — بخش '+fa(i+1);focus='تدریس و تمرین بخش '+fa(i+1);}
+    sess.push({title,focus,index:i+1});
+  }
+  return sess;
+}
+
+/* ===== Templates ===== */
+const TEMPLATES={
+  math:{subject:'ریاضی',grade:'پنجم ابتدایی',topic:'کسر و جمع کسرها',approach:'حل مسئله',duration:45,sessions:1,materials:'تخته، کارت کسر، برگه فعالیت',prior:'آشنایی با مفهوم عدد و تقسیم',notes:'استفاده از مثال‌های زندگی روزمره'},
+  science:{subject:'علوم تجربی',grade:'چهارم ابتدایی',topic:'نیرو و حرکت',approach:'اکتشافی',duration:45,sessions:1,materials:'توپ، فنر، ماشین اسباب‌بازی',prior:'آشنایی با مفهوم حرکت',notes:'آزمایش ساده با وسایل کلاس'},
+  lit:{subject:'فارسی',grade:'ششم ابتدایی',topic:'آرایه تشبیه',approach:'بحث گروهی',duration:45,sessions:1,materials:'متن درس، کارت واژه',prior:'خواندن روان متن و آشنایی با واژگان',notes:'استفاده از شعرهای آشنا'},
+  social:{subject:'مطالعات اجتماعی',grade:'هفتم',topic:'منابع طبیعی ایران',approach:'یادگیری مشارکتی',duration:45,sessions:1,materials:'نقشه ایران، تصاویر',prior:'آشنایی با مفهوم منابع',notes:'پیوند با محیط محلی'},
+  lang:{subject:'زبان انگلیسی',grade:'هشتم',topic:'Present Simple',approach:'ترکیبی',duration:45,sessions:1,materials:'فلش‌کارت، کتاب درسی',prior:'آشنایی با فعل to be',notes:'تمرین گفتاری دونفره'},
+  religion:{subject:'دینی و قرآن',grade:'هفتم',topic:'نماز و آثار آن',approach:'پرسش و پاسخ',duration:45,sessions:1,materials:'کتاب درسی، متن حدیث',prior:'آشنایی با احکام نماز',notes:'پیوند با تجربه‌های روزمره'}
+};
+
+/* ===== Form ===== */
+function getVal(sid,cid){const s=$(sid);if(!s)return '';if(s.value==='__custom__'){const c=$(cid);return c?norm(c.value):'';}return norm(s.value);}
+function getData(){
+  const dE=$('duration'),raw=dE?parseInt(dE.value,10):NaN;
+  const sE=$('students'),sR=sE?parseInt(sE.value,10):NaN;
+  const ssE=$('sessions'),ssR=ssE?parseInt(ssE.value,10):NaN;
+  return {
+    teacher:norm($('teacher')?.value),school:norm($('school')?.value),
+    grade:getVal('grade','gradeCustom'),subject:getVal('subject','subjectCustom'),
+    topic:norm($('topic')?.value),
+    duration:isNaN(raw)?45:Math.max(20,Math.min(240,raw)),
+    date:norm($('date')?.value),
+    students:isNaN(sR)?30:Math.max(1,Math.min(100,sR)),
+    sessions:isNaN(ssR)?1:Math.max(1,Math.min(10,ssR)),
+    approach:norm($('approach')?.value),
+    materials:norm($('materials')?.value),
+    prior:norm($('prior')?.value),
+    notes:norm($('notes')?.value)
+  };
+}
+function setSelectOrCustom(sid,cid,v){
+  const s=$(sid),c=$(cid);if(!s)return;
+  if(!v){s.selectedIndex=0;if(c){c.value='';c.style.display='none';}return;}
+  const found=[...s.options].some(o=>o.value===v);
+  if(found){s.value=v;if(c){c.value='';c.style.display='none';}}
+  else{s.value='__custom__';if(c){c.value=v;c.style.display='block';}}
+}
+function applyDataToForm(d,theme){
+  ['teacher','school','date','materials','prior','notes','approach'].forEach(k=>{const el=$(k);if(el&&d[k]!==undefined)el.value=d[k];});
+  setSelectOrCustom('subject','subjectCustom',d.subject||'');
+  setSelectOrCustom('grade','gradeCustom',d.grade||'');
+  if($('topic'))$('topic').value=d.topic||'';
+  if($('duration')&&d.duration!==undefined)$('duration').value=d.duration;
+  if($('students')&&d.students!==undefined)$('students').value=d.students;
+  if($('sessions')&&d.sessions!==undefined)$('sessions').value=d.sessions;
+  if($('theme')&&theme)$('theme').value=theme;
+}
+
+/* ===== Autosave ===== */
+let autosaveTimer;
+function scheduleAutosave(){
+  clearTimeout(autosaveTimer);
+  autosaveTimer=setTimeout(()=>{
+    try{
+      const data={form:getData(),theme:$('theme')?.value||'blue',ts:Date.now()};
+      safeSet(AUTOSAVE_KEY,JSON.stringify(data));
+      const tag=$('autosaveTag');if(tag){tag.classList.add('show');setTimeout(()=>tag.classList.remove('show'),1500);}
+    }catch(e){}
+  },800);
+}
+function restoreAutosave(){
+  try{
+    const raw=safeGet(AUTOSAVE_KEY);if(!raw)return;
+    const data=JSON.parse(raw);
+    if(!data||!data.form||!data.form.topic)return;
+    if(Date.now()-data.ts>30*24*60*60*1000)return;
+    applyDataToForm(data.form,data.theme);
+    toast('آخرین تغییرات بازیابی شد ✓');
+  }catch(e){}
+}
+
+/* ===== Render ===== */
+const editable=(tag,t,c)=>`<${tag} class="editable ${c||''}" contenteditable="true" spellcheck="false">${esc(t)}</${tag}>`;
+
+function buildQualityCard(d){
+  const checks=[
+    ['نام درس',d.subject?10:0,10],['موضوع',d.topic?15:0,15],['دبیر',d.teacher?8:0,8],
+    ['مدرسه',d.school?5:0,5],['تاریخ',d.date?4:0,4],['توضیحات',d.notes?12:0,12],
+    ['وسایل',d.materials?10:0,10],['پیش‌نیاز',d.prior?10:0,10],['روش',d.approach?8:0,8],
+    ['زمان معقول',(d.duration>=30&&d.duration<=90)?8:4,8]
+  ];
+  let total=0,max=0;
+  checks.forEach(([l,s,m])=>{total+=s;max+=m;});
+  const pct=Math.round(total/max*100);
+  const color=pct>=85?'#15966b':pct>=70?'#2867b2':pct>=50?'#e0a53a':'#c0392b';
+  const msg=pct>=85?'طرح جامع و کامل است.':pct>=70?'طرح خوب است.':pct>=50?'طرح پایه است.':'چند فیلد اصلی خالی است.';
+  return `<div style="max-width:210mm;margin:0 auto 14px;background:linear-gradient(135deg,#f0f8ff,#f5fffe);border:1px solid #e0e8f3;border-radius:12px;padding:12px 16px;display:flex;align-items:center;gap:14px"><div style="font-size:32px;font-weight:900;color:${color}">${fa(pct)}٪</div><div style="flex:1"><div style="font-size:12px;font-weight:800;color:#173b68">📊 امتیاز کیفیت</div><div style="font-size:11px;color:#6d7c92">${esc(msg)}</div></div></div>`;
+}
+
+function buildBloomCoverage(behaviors){
+  const counts={};BLOOM.forEach(b=>counts[b.key]=0);
+  behaviors.forEach(b=>{if(counts[b.bloom]!==undefined)counts[b.bloom]++;});
+  const covered=BLOOM.filter(b=>counts[b.key]>0).length;
+  let html=`<div style="max-width:210mm;margin:0 auto 14px;background:white;border:1px solid #e0e8f3;border-radius:12px;padding:12px 16px"><div style="font-size:13px;font-weight:800;color:#173b68;margin-bottom:8px">🏷 پوشش سطوح بلوم — ${fa(covered)} از ${fa(BLOOM.length)}</div><div style="display:grid;grid-template-columns:repeat(6,1fr);gap:6px">`;
+  BLOOM.forEach(b=>{const c=counts[b.key];html+=`<div style="text-align:center;padding:6px 4px;border-radius:8px;border:1px solid ${c>0?b.color:'#e0e8f3'};background:${c>0?'white':'#fbfdff'};font-size:10px;color:${c>0?'#20304b':'#8899ad'};font-weight:700"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${b.color};margin-bottom:4px"></span><div>${esc(b.label)}</div><div style="font-size:10px;color:${b.color};font-weight:900;margin-top:2px">${c>0?fa(c):'—'}</div></div>`;});
+  return html+'</div></div>';
+}
+
+function bloomListHtml(behaviors){
+  let o='';
+  behaviors.forEach(b=>{
+    o+=`<li contenteditable="true"><span class="bt">${bloomTag(b.bloom)}</span><span style="flex:1">${esc(b.text)}</span>${bloomSelect(b.bloom)}</li>`;
+  });
+  return '<ul class="bloom-list">'+o+'</ul>';
+}
+
+function buildIdentity(d,method){
+  const pairs=[['دبیر',d.teacher||'—'],['مدرسه',d.school||'—'],['پایه',d.grade||'—'],['درس',d.subject||'—'],['موضوع',d.topic||'—'],['تاریخ',d.date||'—'],['دانش‌آموزان',fa(d.students)+' نفر'],['مدت',fa(d.duration)+' دقیقه'],['روش',method.split('،')[0]]];
+  return pairs.map(([k,v])=>`<div class="meta-item" contenteditable="true"><b>${esc(k)}</b>${esc(v)}</div>`).join('');
+}
+
+function renderLessonHeader(d,session,isUnit){
+  let title,subtitle;
+  if(isUnit){title='واحد آموزشی: '+esc(d.topic||'—');subtitle=`${fa(d.sessions)} جلسه · هر جلسه ${fa(d.duration)} دقیقه · مجموع ${fa(d.sessions*d.duration)} دقیقه`;}
+  else if(session&&session.index>1){title=`جلسه‌ی ${fa(session.index)} — طرح درس ${esc(d.subject||'درس')}`;subtitle=`موضوع: ${esc(session.title)} | مدت: ${fa(d.duration)} دقیقه`;}
+  else{title='طرح درس '+esc(d.subject||'درس');subtitle=`موضوع: ${esc(d.topic||'—')} | مدت: ${fa(d.duration)} دقیقه`;}
+  return `<div class="lesson-header"><div class="lesson-logo"><strong>آکادمی اندیشا</strong> · اندیشه نگار</div><h2 contenteditable="true">${title}</h2><p contenteditable="true">${subtitle}</p><div class="meta-grid">${buildIdentity(d,d.approach||'')}</div></div>`;
+}
+
+function renderGoalSection(goal){return `<section class="lesson-section"><h3><span class="num">۱</span>هدف کلی</h3>${editable('p',goal)}</section>`;}
+function renderObjectivesSection(specifics){
+  const labels=['دانشی','مهارتی','نگرشی'];
+  const cards=specifics.map((p,i)=>{const idx=p.indexOf(': '),body=idx>-1?p.slice(idx+2):p;return `<div class="objective-card" contenteditable="true"><strong>${labels[i]}</strong>${esc(body)}</div>`;}).join('');
+  return `<section class="lesson-section"><h3><span class="num">۲</span>اهداف جزئی</h3><div class="objective-grid">${cards}</div></section>`;
+}
+function renderBehaviorsSection(b){return `<section class="lesson-section"><h3><span class="num">۳</span>اهداف رفتاری (سنجش‌پذیر)</h3>${bloomListHtml(b)}</section>`;}
+function renderPriorSection(prior,question){return `<section class="lesson-section"><h3><span class="num">۴</span>پیش‌نیازها و ارزشیابی تشخیصی</h3><p><b>پیش‌نیازها:</b> <span contenteditable="true">${esc(prior)}</span></p><p><b>پرسش تشخیصی:</b> <span contenteditable="true">${esc(question)}</span></p></section>`;}
+function renderMethodSection(m){return `<section class="lesson-section"><h3><span class="num">۵</span>روش‌های تدریس</h3>${editable('p',m+'؛ با تأکید بر مشارکت فعال، بازخورد سازنده.')}</section>`;}
+function renderToolsSection(t){return `<section class="lesson-section"><h3><span class="num">۶</span>ابزار و رسانه‌ها</h3>${editable('p',t+'.')}</section>`;}
+function renderTimingSection(d,p,session){
+  const rows=p.rows.map(r=>r.slice());
+  if(session&&session.index>1)rows[0][3]='مرور جلسه قبل و بررسی تکلیف؛ '+rows[0][3];
+  if(session&&session.index<(d.sessions||1))rows[rows.length-1][3]+=' و آماده‌سازی جلسه بعد';
+  const tbody=rows.map(r=>'<tr>'+r.map((v,i)=>`<td${i===0?' style="white-space:nowrap"':''} contenteditable="true">${esc(i===2?fa(v):v)}</td>`).join('')+'</tr>').join('');
+  return `<section class="lesson-section"><h3><span class="num">۷</span>جدول زمان‌بندی</h3><div style="overflow-x:auto"><table class="lesson-table"><thead><tr><th>مرحله</th><th>عنوان</th><th>زمان</th><th>فعالیت</th><th>ارزشیابی</th></tr></thead><tbody>${tbody}</tbody><tfoot><tr><th colspan="2">جمع</th><th>${fa(d.duration)} دقیقه</th><td colspan="2">یادگیری فعال، مشاهده و بازخورد</td></tr></tfoot></table></div></section>`;
+}
+function renderHomeworkSection(d){return `<section class="lesson-section"><h3><span class="num">۸</span>تکلیف و پیگیری</h3>${editable('p',`تمرین: یک نمونه تازه از «${d.topic||'موضوع درس'}» در محیط یا کتاب بیابید و جلسه بعد ارائه دهید.`)}</section>`;}
+function renderDifferentiationSection(){return `<section class="lesson-section"><h3><span class="num">۹</span>تفاوت‌های فردی</h3><ul><li contenteditable="true">برای دانش‌آموزان نیازمند حمایت، مثال ساده‌تر و فرصت تمرین بیشتر.</li><li contenteditable="true">برای دانش‌آموزان پیشرو، پرسش چالشی یا فعالیت تکمیلی.</li><li contenteditable="true">امکان پاسخ‌گویی شفاهی، نوشتاری یا تصویری.</li></ul></section>`;}
+function renderNotesSection(d){const box=d.notes?`<div class="info-box" contenteditable="true"><b>تأکیدها:</b> ${esc(d.notes)}</div>`:'<p contenteditable="true">پس از اجرا، میزان دستیابی به اهداف ثبت شود.</p>';return `<section class="lesson-section"><h3><span class="num">۱۰</span>یادداشت‌های معلم</h3>${box}</section>`;}
+function renderSignature(){return `<div class="footer-sign"><span contenteditable="true">امضای دبیر: ..................</span><span contenteditable="true">تأیید مدیر: ..................</span></div>`;}
+function renderSessionHeader(s){return `<div class="session-header"><div class="brand-mini">آکادمی اندیشا</div><h3>جلسه‌ی ${fa(s.index)}: ${esc(s.title)}</h3><p>${esc(s.focus)}</p></div>`;}
+
+function buildRubricSection(d){
+  const rubric=buildRubric(d.topic||'موضوع درس');
+  let html=`<section class="lesson-section"><h3><span class="num">📋</span>روبريک ارزشیابی</h3><div style="overflow-x:auto"><table class="rubric-table"><thead><tr><th>معیار</th><th>عالی (۴)</th><th>خوب (۳)</th><th>قابل قبول (۲)</th><th>نیازمند تلاش (۱)</th></tr></thead><tbody>`;
+  rubric.forEach(r=>{html+=`<tr><td>${esc(r.name)}</td>${r.levels.map(l=>`<td>${esc(l)}</td>`).join('')}</tr>`;});
+  return html+'</tbody></table></div></section>';
+}
+
+function renderSingleFull(d,p,session){
+  const method=d.approach||p.c.method,tools=d.materials||p.c.tools,prior=d.prior||p.c.prereq;
+  return renderLessonHeader(d,null,false)
+    +renderGoalSection(p.goal)+renderObjectivesSection(p.specifics)+renderBehaviorsSection(p.behaviors)
+    +renderPriorSection(prior,p.c.question)+renderMethodSection(method)+renderToolsSection(tools)
+    +renderTimingSection(d,p,session)+renderHomeworkSection(d)+renderDifferentiationSection()
+    +renderNotesSection(d)+renderSignature();
+}
+
+function render(d,p){
+  const sessions=buildSessions(d,d.sessions);
+  const method=d.approach||p.c.method,tools=d.materials||p.c.tools,prior=d.prior||p.c.prereq;
+  let html=buildQualityCard(d)+buildBloomCoverage(p.behaviors);
+  html+='<div class="lesson" id="lessonContent"><div class="editable-note">✏️ همه بخش‌ها قابل ویرایش‌اند · سطح بلوم هر هدف را می‌توانید تغییر دهید.</div>';
+  if(sessions.length===1){
+    html+=renderSingleFull(d,p,sessions[0]);
+  } else {
+    html+=renderLessonHeader(d,null,true);
+    html+=`<section class="lesson-section"><h3><span class="num">📓</span>مرور کلی واحد</h3><table class="lesson-table"><thead><tr><th>جلسه</th><th>عنوان</th><th>تمرکز</th></tr></thead><tbody>${sessions.map(s=>`<tr><td>${fa(s.index)}</td><td>${esc(s.title)}</td><td>${esc(s.focus)}</td></tr>`).join('')}</tbody></table></section>`;
+    html+=renderGoalSection(p.goal)+renderObjectivesSection(p.specifics)+renderBehaviorsSection(p.behaviors)+renderPriorSection(prior,p.c.question)+renderMethodSection(method)+renderToolsSection(tools);
+    sessions.forEach(s=>{
+      html+=`<div class="session-divider"></div>${renderSessionHeader(s)}${renderTimingSection(d,p,s)}${renderHomeworkSection(d)}${renderNotesSection(d)}${renderSignature()}`;
+    });
+  }
+  html+=buildRubricSection(d);
+  html+=`<div class="lesson-footer"><span class="brand-main">آکادمی اندیشا</span><span class="brand-sub">اندیشه نگار · آموزش هوشمند، اندیشه روشن ✦</span></div></div>`;
+  $('document').innerHTML=html;
+  applyTheme($('theme')?.value||'blue');
+  bindBloomSelects();
+}
+
+function bindBloomSelects(){
+  document.querySelectorAll('.lesson [data-bloom]').forEach(sel=>{
+    sel.addEventListener('change',function(){
+      const li=this.closest('li');if(!li)return;
+      const tag=li.querySelector('.bloom-tag');
+      const b=bloomInfo(this.value);
+      if(tag){tag.textContent=b.label;tag.style.color=b.color;tag.style.borderColor=b.color;tag.style.background=b.color+'18';}
+    });
+  });
+}
+
+function generate(){
+  try{
+    const d=getData();
+    if(!d.topic){setStatus('لطفاً موضوع درس را وارد کنید.',true);$('topic')?.focus();toast('موضوع درس را وارد کنید.');return;}
+    setStatus('در حال ساخت…');
+    render(d,makePlan(d));
+    setStatus('آماده شد؛ ویرایش، ذخیره، Word یا چاپ کنید.');
+    toast('طرح درس آماده شد ✓');
+    if(window.innerWidth<850)$('document')?.scrollIntoView({behavior:'smooth',block:'start'});
+    resetTimer();
+  }catch(err){setStatus('خطا: '+(err?.message||err),true);toast('خطا در تولید');}
+}
+
+/* ===== Print ===== */
+function printPlan(){
+  if(!$('lessonContent')){toast('ابتدا طرح را بسازید.');return;}
+  document.activeElement?.blur();
+  setTimeout(()=>{try{window.print();}catch(e){toast('چاپ پشتیبانی نمی‌شود.');}},100);
+}
+
+/* ===== RTF export (ساده‌شده، بدون واترمارک مشکل‌دار) ===== */
+function escRTF(s){
+  if(s==null)return '';
+  s=String(s);let out='';
+  for(let i=0;i<s.length;i++){
+    const c=s.charCodeAt(i);
+    if(c===10){out+='\\line ';continue;}
+    if(c===13)continue;
+    if(c===9){out+='\\tab ';continue;}
+    if(c===92){out+='\\\\';continue;}
+    if(c===123){out+='\\{';continue;}
+    if(c===125){out+='\\}';continue;}
+    if(c>=32&&c<127){out+=String.fromCharCode(c);continue;}
+    if(c>32767)c-=65536;
+    out+='\\u'+c+'?';
+  }
+  return out;
+}
+
+function buildRTF(d){
+  const p=makePlan(d),sessions=buildSessions(d,d.sessions);
+  const method=d.approach||p.c.method,tools=d.materials||p.c.tools,prior=d.prior||p.c.prereq;
+  const rtf=[];
+  rtf.push('{\\rtf1\\ansi\\ansicpg65001\\deff0');
+  rtf.push('{\\fonttbl{\\f0 Tahoma;}}');
+  rtf.push('{\\colortbl;\\red40\\green103\\blue178;\\red23\\green59\\blue104;\\red120\\green140\\blue160;}');
+  rtf.push('\\uc1\\viewkind4\\f0\\fs20');
+  rtf.push('{\\header\\pard\\rtlpar\\qc\\f0\\fs14\\cf3 آکادمی اندیشا · eitaa.com/Andeesha\\par}');
+  rtf.push('{\\footer\\pard\\rtlpar\\qc\\f0\\fs12\\cf3 اندیشه نگار · آموزش هوشمند\\par}');
+
+  const P=(text,o={})=>{
+    o=o||{};let s='\\pard\\rtlpar\\f0';
+    s+=o.align==='center'?'\\qc':'\\qj';
+    if(o.size)s+='\\fs'+o.size;
+    if(o.bold)s+='\\b';
+    if(o.color)s+='\\cf'+o.color;
+    s+=' '+escRTF(text);
+    if(o.bold)s+='\\b0';
+    if(o.color)s+='\\cf0';
+    return s+'\\par\n';
+  };
+
+  rtf.push(P('آکادمی اندیشا · اندیشه نگار',{align:'center',size:28,bold:true,color:1}));
+  rtf.push(P('eitaa.com/Andeesha',{align:'center',size:14,color:3}));
+  if(sessions.length>1)rtf.push(P('واحد آموزشی: '+d.topic+' — '+fa(sessions.length)+' جلسه',{align:'center',size:24,bold:true,color:2}));
+  else rtf.push(P('طرح درس '+d.subject,{align:'center',size:24,bold:true,color:2}));
+  rtf.push(P('موضوع: '+d.topic+' | مدت: '+fa(d.duration)+' دقیقه',{align:'center',size:18}));
+  rtf.push(P(''));
+  rtf.push(P('دبیر: '+(d.teacher||'—')+' | مدرسه: '+(d.school||'—')+' | پایه: '+(d.grade||'—'),{size:18}));
+  rtf.push(P('تاریخ: '+(d.date||'—')+' | دانش‌آموزان: '+fa(d.students)+' نفر | روش: '+method.split('،')[0],{size:18}));
+  rtf.push(P(''));
+
+  const shared=()=>{
+    rtf.push(P('۱. هدف کلی',{size:22,bold:true,color:1}));rtf.push(P(p.goal));
+    rtf.push(P('۲. اهداف جزئی',{size:22,bold:true,color:1}));
+    p.specifics.forEach(s=>rtf.push(P('• '+s)));
+    rtf.push(P('۳. اهداف رفتاری',{size:22,bold:true,color:1}));
+    p.behaviors.forEach(b=>rtf.push(P('• ['+bloomInfo(b.bloom).label+'] '+b.text)));
+    rtf.push(P('۴. پیش‌نیازها',{size:22,bold:true,color:1}));rtf.push(P(prior));
+    rtf.push(P('پرسش تشخیصی: '+p.c.question));
+    rtf.push(P('۵. روش تدریس',{size:22,bold:true,color:1}));rtf.push(P(method));
+    rtf.push(P('۶. ابزار',{size:22,bold:true,color:1}));rtf.push(P(tools));
+  };
+
+  const timing=session=>{
+    rtf.push(P('۷. جدول زمان‌بندی',{size:22,bold:true,color:1}));
+    p.rows.forEach(r=>{
+      rtf.push(P('مرحله '+r[0]+': '+r[1]+' ('+fa(r[2])+' دقیقه)',{size:20,bold:true,color:2}));
+      rtf.push(P('فعالیت: '+r[3],{size:16}));
+      rtf.push(P('ارزشیابی: '+r[4],{size:14,color:3}));
+    });
+    rtf.push(P('۸. تکلیف',{size:22,bold:true,color:1}));
+    rtf.push(P('یک نمونه تازه از «'+d.topic+'» پیدا کنید.'));
+    rtf.push(P('۹. تفاوت‌های فردی',{size:22,bold:true,color:1}));
+    rtf.push(P('• دانش‌آموزان نیازمند حمایت: مثال ساده‌تر و تمرین بیشتر.'));
+    rtf.push(P('• دانش‌آموزان پیشرو: پرسش چالشی.'));
+    rtf.push(P('۱۰. ملاحظات معلم',{size:22,bold:true,color:1}));
+    rtf.push(P(d.notes||'پس از اجرا ثبت شود.'));
+    rtf.push(P('امضای دبیر: ............ | تأیید مدیر: ............'));
+  };
+
+  if(sessions.length===1){shared();timing(sessions[0]);}
+  else{
+    shared();
+    sessions.forEach(s=>{
+      rtf.push(P('━━━ جلسه‌ی '+fa(s.index)+': '+s.title+' ━━━',{align:'center',size:22,bold:true,color:2}));
+      timing(s);
+    });
+  }
+
+  rtf.push(P('📋 روبريک',{size:22,bold:true,color:1}));
+  buildRubric(d.topic).forEach(r=>{
+    rtf.push(P(r.name,{size:20,bold:true,color:2}));
+    rtf.push(P('عالی(۴): '+r.levels[0],{size:14}));
+    rtf.push(P('خوب(۳): '+r.levels[1],{size:14}));
+    rtf.push(P('قابل قبول(۲): '+r.levels[2],{size:14}));
+    rtf.push(P('نیازمند تلاش(۱): '+r.levels[3],{size:14}));
+  });
+
+  rtf.push('}');
+  return rtf.join('');
+}
+
+function robustDownload(content,filename,mime){
+  try{
+    const blob=new Blob([content],{type:mime||'application/octet-stream'});
+    if(window.navigator?.msSaveOrOpenBlob){window.navigator.msSaveOrOpenBlob(blob,filename);return true;}
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');
+    a.href=url;a.download=filename;a.rel='noopener';
+    a.style.cssText='position:fixed;top:-9999px;left:-9999px;opacity:0';
+    document.body.appendChild(a);a.click();
+    setTimeout(()=>{try{document.body.removeChild(a);URL.revokeObjectURL(url);}catch(e){}},3000);
+    return true;
+  }catch(e){console.error(e);return false;}
+}
+
+function exportWord(){
+  const d=getData();
+  if(!d.topic){toast('ابتدا موضوع را وارد کنید.');return;}
+  try{
+    const rtf=buildRTF(d);
+    const filename='tarh-dars-'+(d.topic||'plan').replace(/[\\/:*?"<>|]/g,'').replace(/\s+/g,'-')+'.rtf';
+    if(robustDownload(rtf,filename,'application/rtf')){toast('فایل Word (RTF) دانلود شد ✓');setStatus('فایل RTF ذخیره شد.');}
+    else showDlModal('📤 Word RTF','مرورگر اجازه دانلود نداد. محتوا را کپی کنید.',['کپی','Notepad','ذخیره با .rtf','باز با Word'],rtf);
+  }catch(e){toast('خطا: '+e.message);}
+}
+
+/* ===== Share ===== */
+function encodeShare(d,theme){return btoa(unescape(encodeURIComponent(JSON.stringify({v:2,d,theme})))).replace(/=+$/,'');}
+function decodeShare(b64){const pad=b64+'='.repeat((4-b64.length%4)%4);return JSON.parse(decodeURIComponent(escape(atob(pad))));}
+function sharePlan(){
+  if(!$('lessonContent')){toast('ابتدا طرح را بسازید.');return;}
+  const d=getData();if(!d.topic){toast('موضوع خالی است.');return;}
+  try{
+    const code=encodeShare(d,$('theme')?.value||'blue');
+    const url=location.protocol+'//'+location.host+location.pathname+'#plan='+code;
+    const done=()=>toast('لینک کپی شد ✓');
+    const legacy=()=>{const a=document.createElement('textarea');a.value=url;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();try{document.execCommand('copy');done();}catch(e){prompt('لینک:',url);}document.body.removeChild(a);};
+    if(navigator.clipboard?.writeText)navigator.clipboard.writeText(url).then(done,legacy);else legacy();
+  }catch(e){toast('ساخت لینک ناموفق.');}
+}
+function checkShareLink(){
+  const hash=location.hash;
+  if(!hash||!hash.startsWith('#plan='))return false;
+  try{
+    const payload=decodeShare(hash.slice(6));
+    if(payload?.d?.topic){
+      applyDataToForm(payload.d,payload.theme);
+      setTimeout(()=>{generate();toast('طرح از لینک بارگذاری شد ✓');try{history.replaceState(null,'',location.pathname+location.search);}catch(e){}},300);
+      return true;
+    }
+  }catch(e){}
+  return false;
+}
+window.addEventListener('hashchange',()=>{if(checkShareLink()){}else if(!location.hash){}});
+
+/* ===== Copy ===== */
+function copyText(){
+  const l=$('lessonContent');if(!l){toast('ابتدا طرح را بسازید.');return;}
+  const t=l.innerText||l.textContent||'';
+  const done=()=>toast('متن کپی شد ✓');
+  const legacy=()=>{try{const a=document.createElement('textarea');a.value=t;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();document.execCommand('copy');document.body.removeChild(a);done();}catch(e){toast('مرورگر اجازه کپی نداد.');}};
+  if(navigator.clipboard?.writeText)navigator.clipboard.writeText(t).then(done,legacy);else legacy();
+}
+
+/* ===== Bank ===== */
+function getBank(){try{const r=safeGet(BANK_KEY);const a=r?JSON.parse(r):[];return Array.isArray(a)?a:[];}catch(e){return [];}}
+function setBank(a){try{localStorage.setItem(BANK_KEY,JSON.stringify(a));return true;}catch(e){toast('حافظه پر است.');return false;}}
+function savePlan(){
+  if(!$('lessonContent')){toast('ابتدا طرح بسازید.');return;}
+  const d=getData();if(!d.topic){toast('موضوع خالی است.');return;}
+  let bank=getBank();
+  bank.unshift({id:'p'+Date.now()+'_'+Math.random().toString(36).slice(2,7),topic:d.topic,subject:d.subject,grade:d.grade,savedAt:new Date().toLocaleString('fa-IR'),data:d,theme:$('theme')?.value||'blue'});
+  if(bank.length>BANK_MAX)bank=bank.slice(0,BANK_MAX);
+  if(setBank(bank)){renderBank();toast('ذخیره شد ✓');$('bankBox').open=true;}
+}
+function loadPlan(id){
+  const item=getBank().find(x=>x.id===id);if(!item)return;
+  applyDataToForm(item.data||{},item.theme);generate();toast('«'+item.topic+'» بازیابی شد ✓');
+}
+function deletePlan(id){if(!confirm('این طرح حذف شود؟'))return;if(setBank(getBank().filter(x=>x.id!==id))){renderBank();toast('حذف شد.');}}
+function clearBank(){if(!confirm('همه‌ی طرح‌ها حذف شوند؟'))return;if(setBank([])){renderBank();toast('بانک خالی شد.');}}
+function renderBank(){
+  const bank=getBank();$('bankCount').textContent=fa(bank.length);
+  const list=$('bankList');
+  if(!bank.length){list.innerHTML='<div class="bank-empty">هنوز طرحی ذخیره نشده است.</div>';return;}
+  list.innerHTML=bank.map(it=>{
+    const meta=[it.subject,it.grade,it.savedAt].filter(Boolean).join(' · ');
+    return `<div class="bank-item"><div class="bank-item-info"><b title="${esc(it.topic)}">${esc(it.topic||'بدون عنوان')}</b><small>${esc(meta)}</small></div><div class="bank-item-actions"><button class="bank-load" data-load="${esc(it.id)}">بازیابی</button><button class="bank-del" data-del="${esc(it.id)}">حذف</button></div></div>`;
+  }).join('');
+  list.querySelectorAll('[data-load]').forEach(b=>b.addEventListener('click',()=>loadPlan(b.dataset.load)));
+  list.querySelectorAll('[data-del]').forEach(b=>b.addEventListener('click',()=>deletePlan(b.dataset.del)));
+}
+
+/* ===== Profiles ===== */
+function getProfiles(){try{const r=safeGet(PROFILES_KEY);const a=r?JSON.parse(r):[];return Array.isArray(a)?a:[];}catch(e){return [];}}
+function setProfiles(a){try{localStorage.setItem(PROFILES_KEY,JSON.stringify(a));return true;}catch(e){toast('حافظه پر است.');return false;}}
+function saveProfile(){
+  const name=norm($('teacher')?.value),school=norm($('school')?.value);
+  if(!name){toast('نام دبیر خالی است.');$('teacher')?.focus();return;}
+  let ps=getProfiles();
+  const idx=ps.findIndex(p=>p.name===name&&p.school===school);
+  const item={id:'pr'+Date.now(),name,school,savedAt:new Date().toLocaleString('fa-IR')};
+  if(idx>=0)ps[idx]=item;else ps.unshift(item);
+  if(setProfiles(ps)){renderProfiles();toast('پروفایل ذخیره شد ✓');$('profilesBox').open=true;}
+}
+function loadProfile(id){const p=getProfiles().find(x=>x.id===id);if(!p)return;if($('teacher'))$('teacher').value=p.name;if($('school'))$('school').value=p.school||'';toast('اعمال شد ✓');}
+function deleteProfile(id){if(!confirm('حذف شود؟'))return;if(setProfiles(getProfiles().filter(x=>x.id!==id))){renderProfiles();toast('حذف شد.');}}
+function clearProfiles(){if(!confirm('همه حذف شوند؟'))return;if(setProfiles([])){renderProfiles();toast('پاک شد.');}}
+function renderProfiles(){
+  const ps=getProfiles();$('profileCount').textContent=fa(ps.length);
+  const list=$('profileList');
+  if(!ps.length){list.innerHTML='<div class="profile-empty">هنوز پروفایلی ذخیره نشده است.</div>';return;}
+  list.innerHTML=ps.map(it=>`<div class="profile-item"><div class="profile-item-info"><b>${esc(it.name)}</b><small>${esc(it.school||'—')}</small></div><div class="profile-item-actions"><button class="profile-load" data-pload="${esc(it.id)}">اعمال</button><button class="profile-del" data-pdel="${esc(it.id)}">حذف</button></div></div>`).join('');
+  list.querySelectorAll('[data-pload]').forEach(b=>b.addEventListener('click',()=>loadProfile(b.dataset.pload)));
+  list.querySelectorAll('[data-pdel]').forEach(b=>b.addEventListener('click',()=>deleteProfile(b.dataset.pdel)));
+}
+
+/* ===== Backup ===== */
+function exportBackup(){
+  try{
+    const data={version:2,app:'andishe-negara-v2',exportedAt:new Date().toISOString(),creator:safeGet(CREATOR_KEY),dark:safeGet(DARK_KEY),bank:getBank(),profiles:getProfiles()};
+    const json=JSON.stringify(data,null,2);
+    if(robustDownload(json,'andishe-backup-'+Date.now()+'.json','application/json')){toast('پشتیبان دانلود شد ✓');}
+    else showDlModal('💾 پشتیبان','مرورگر اجازه دانلود نداد.',['کپی','Notepad','ذخیره با .json'],json);
+  }catch(e){toast('خطا: '+e.message);}
+}
+function importBackup(file){
+  if(!file)return;
+  const reader=new FileReader();
+  reader.onerror=()=>toast('خطا در خواندن.');
+  reader.onload=e=>{
+    try{
+      const data=JSON.parse(e.target.result);
+      if(!data.version||!data.app)throw new Error('فایل معتبر نیست.');
+      const total=(data.bank?.length||0)+(data.profiles?.length||0);
+      if(!confirm('بازیابی '+total+' آیتم؟ داده‌های فعلی جایگزین می‌شوند.'))return;
+      if(data.creator!==undefined)safeSet(CREATOR_KEY,data.creator);
+      if(data.dark!==undefined)safeSet(DARK_KEY,data.dark);
+      if(data.bank)setBank(data.bank);
+      if(data.profiles)setProfiles(data.profiles);
+      updateCreatorUI();setDark(isDark());renderBank();renderProfiles();
+      toast('پشتیبان بازیابی شد ✓');
+    }catch(err){toast('خطا: '+err.message);}
+  };
+  reader.readAsText(file);
+}
+
+/* ===== Timer ===== */
+const timer={running:false,startTime:0,elapsed:0,intervalId:null};
+function fmtTime(ms){const s=Math.floor(ms/1000),m=Math.floor(s/60),sec=s%60;return fa(m)+':'+(sec<10?'۰':'')+fa(sec);}
+function updateTimerUI(){
+  const d=$('timerDisplay'),f=$('timerFill');if(!d)return;
+  const ms=timer.running?Date.now()-timer.startTime:timer.elapsed;
+  const total=(getData().duration||45)*60*1000;
+  const pct=Math.min(100,(ms/total)*100);
+  d.textContent=fmtTime(ms)+' / '+fmtTime(total);
+  if(f){
+    f.style.width=pct+'%';
+    f.style.background=ms>total?'linear-gradient(90deg,#c0392b,#e74c3c)':pct>80?'linear-gradient(90deg,#c98a1a,#e0a53a)':'linear-gradient(90deg,#13865f,#21b78b)';
+  }
+}
+function startPauseTimer(){
+  const btn=$('timerStartPause');
+  if(timer.running){timer.running=false;clearInterval(timer.intervalId);timer.elapsed=Date.now()-timer.startTime;if(btn)btn.textContent='▶ ادامه';}
+  else{timer.running=true;timer.startTime=Date.now()-timer.elapsed;timer.intervalId=setInterval(updateTimerUI,1000);if(btn)btn.textContent='⏸ توقف';}
+  updateTimerUI();
+}
+function resetTimer(){timer.running=false;clearInterval(timer.intervalId);timer.elapsed=0;timer.startTime=0;const b=$('timerStartPause');if(b)b.textContent='▶ شروع';updateTimerUI();}
+
+/* ===== Creator / Dark ===== */
+function creatorName(){return norm(safeGet(CREATOR_KEY))||DEFAULT_CREATOR;}
+function updateCreatorUI(){
+  if($('creatorName'))$('creatorName').value=norm(safeGet(CREATOR_KEY))||DEFAULT_CREATOR;
+  if($('creatorBadge'))$('creatorBadge').textContent='طراحی و توسعه: '+creatorName();
+  if($('footerCreator'))$('footerCreator').textContent='طراحی و توسعه: '+creatorName();
+}
+function saveCreator(){const n=norm($('creatorName')?.value)||DEFAULT_CREATOR;safeSet(CREATOR_KEY,n===DEFAULT_CREATOR?null:n);updateCreatorUI();toast('ذخیره شد ✓');}
+function isDark(){return safeGet(DARK_KEY)==='1';}
+function setDark(on){
+  document.body.classList.toggle('dark',on);
+  if($('darkToggle'))$('darkToggle').textContent=on?'☀️ روز':'🌙 شب';
+  safeSet(DARK_KEY,on?'1':null);
+}
+
+/* ===== Modals ===== */
+function showDlModal(title,desc,steps,content){
+  $('dlTitle').textContent=title;$('dlDesc').textContent=desc;
+  $('dlSteps').innerHTML=steps.map(s=>`<li>${esc(s)}</li>`).join('');
+  $('dlContent').value=content;$('dlModal').classList.add('show');
+}
+function closeDlModal(){$('dlModal').classList.remove('show');}
+
+/* ===== AI ===== */
+function buildAIPrompt(){
+  const d=getData();
+  const includeRubric=$('aiOptionRubric')?.checked;
+  const includeBloom=$('aiOptionBloom')?.checked;
+  const includeDiff=$('aiOptionDiff')?.checked;
+  const lines=[
+    'شما یک متخصص برنامه‌ریزی درسی هستید. یک طرح درس کامل و حرفه‌ای برای شرایط زیر به زبان فارسی بنویس:',
+    'نام درس: '+(d.subject||'—'),
+    'پایه: '+(d.grade||'—'),
+    'موضوع: '+(d.topic||'—'),
+    'مدت: '+d.duration+' دقیقه',
+    'تعداد جلسات: '+d.sessions,
+    'روش تدریس: '+(d.approach||'خودکار'),
+    'وسایل: '+(d.materials||'خودکار'),
+    'دانسته‌های قبلی: '+(d.prior||'خودکار'),
+    'توضیحات: '+(d.notes||'—'),
+    '',
+    'طرح باید شامل این بخش‌ها باشد:'
+  ];
+  lines.push('۱. هدف کلی');
+  lines.push('۲. اهداف جزئی (دانشی، مهارتی، نگرشی)');
+  lines.push(includeBloom?'۳. اهداف رفتاری سنجش‌پذیر با برچسب سطح بلوم (یادآوری/درک/کاربرد/تحلیل/ارزشیابی/آفرینش)':'۳. اهداف رفتاری سنجش‌پذیر');
+  lines.push('۴. پیش‌نیازها و ارزشیابی تشخیصی');
+  lines.push('۵. روش تدریس');
+  lines.push('۶. ابزار آموزشی');
+  lines.push('۷. جدول زمان‌بندی (مرحله، زمان، فعالیت معلم و دانش‌آموز، ارزشیابی)');
+  lines.push('۸. تکلیف');
+  if(includeDiff)lines.push('۹. توجه به تفاوت‌های فردی');
+  lines.push('۱۰. یادداشت‌های معلم');
+  if(includeRubric)lines.push('📋 روبريک ارزشیابی ۴ سطحی برای معیارهای اصلی');
+  lines.push('');
+  lines.push('خروجی را با ساختار مشخص و قابل کپی بنویس. طول مناسب حدود ۸۰۰ تا ۱۲۰۰ کلمه.');
+  return lines.join('\n');
+}
+function openAIModal(){
+  const d=getData();
+  if(!d.topic){toast('ابتدا موضوع را وارد کنید.');return;}
+  $('aiPrompt').value=buildAIPrompt();
+  $('aiResultWrap').style.display='none';
+  const key=safeGet(AIKEY_KEY);
+  if(key)$('aiKey').value=key;
+  const statusEl=$('aiStatus');
+  statusEl.textContent=key?'آماده — کلید API موجود است':'کلید API تنظیم نشده. می‌توانید پرامپت را کپی و در ChatGPT/Gemini پیست کنید.';
+  statusEl.className='ai-status';
+  $('aiModal').classList.add('show');
+}
+function closeAIModal(){$('aiModal').classList.remove('show');}
+async function callAI(){
+  const key=norm($('aiKey')?.value)||safeGet(AIKEY_KEY);
+  const statusEl=$('aiStatus');
+  if(!key){
+    statusEl.textContent='کلید API تنظیم نشده. از aistudio.google.com/apikey بگیرید (رایگان) و در بخش «تنظیم هوش مصنوعی» ذخیره کنید.';
+    statusEl.className='ai-status error';
+    return;
+  }
+  statusEl.textContent='⏳ در حال ارسال به Gemini…';
+  statusEl.className='ai-status';
+  $('aiCallBtn').disabled=true;
+  try{
+    const resp=await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key='+encodeURIComponent(key),{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({contents:[{parts:[{text:buildAIPrompt()}]}]})
+    });
+    if(!resp.ok){
+      const err=await resp.text();
+      throw new Error('HTTP '+resp.status+' — '+err.slice(0,200));
+    }
+    const data=await resp.json();
+    const text=data?.candidates?.[0]?.content?.parts?.[0]?.text;
+    if(!text)throw new Error('پاسخ خالی');
+    $('aiResult').value=text;
+    $('aiResultWrap').style.display='block';
+    $('aiApplyBtn').style.display='inline-block';
+    statusEl.textContent='✅ پاسخ دریافت شد. می‌توانید کپی کنید یا در یادداشت‌ها ذخیره کنید.';
+    statusEl.className='ai-status success';
+  }catch(e){
+    statusEl.textContent='❌ خطا: '+e.message+' — می‌توانید پرامپت را کپی و در ChatGPT/Gemini استفاده کنید.';
+    statusEl.className='ai-status error';
+  }finally{
+    $('aiCallBtn').disabled=false;
+  }
+}
+function applyAIResult(){
+  const text=$('aiResult')?.value;
+  if(!text){toast('نتیجه‌ای وجود ندارد.');return;}
+  const notes=$('notes');
+  if(notes)notes.value=(notes.value?notes.value+'\n\n':'')+'=== طرح پیشنهادی AI ===\n'+text;
+  scheduleAutosave();
+  toast('در یادداشت‌ها ذخیره شد ✓');
+  closeAIModal();
+}
+
+/* ===== Templates apply ===== */
+function applyTemplate(key){
+  const t=TEMPLATES[key];if(!t)return;
+  applyDataToForm(t,'blue');
+  if($('notes'))$('notes').value=t.notes||'';
+  scheduleAutosave();
+  toast('قالب «'+t.topic+'» اعمال شد ✓');
+  setTimeout(()=>generate(),200);
+}
+
+/* ===== Clear ===== */
+function clearForm(){
+  ['teacher','school','materials','prior','notes','date','topic'].forEach(id=>{const el=$(id);if(el)el.value='';});
+  setSelectOrCustom('subject','subjectCustom','');setSelectOrCustom('grade','gradeCustom','');
+  if($('duration'))$('duration').value=45;
+  if($('students'))$('students').value=30;
+  if($('sessions'))$('sessions').value=1;
+  if($('theme'))$('theme').value='blue';
+  if($('approach'))$('approach').value='';
+  $('document').innerHTML='<div class="empty"><div><div class="empty-icon">📘</div><h3>طرح درس اینجا نمایش داده می‌شود</h3><p>مشخصات را وارد و «تولید» را بزنید.</p></div></div>';
+  setStatus('فرم پاک شد.');toast('فرم پاک شد.');resetTimer();
+  safeSet(AUTOSAVE_KEY,null);
+}
+
+/* ===== PWA ===== */
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt',e=>{
+  e.preventDefault();
+  deferredPrompt=e;
+  const btn=$('pwaInstallBtn');
+  if(btn)btn.style.display='inline-block';
+});
+async function installPWA(){
+  if(!deferredPrompt){toast('نصب از منوی مرورگر: ⋮ > Add to Home Screen');return;}
+  deferredPrompt.prompt();
+  const {outcome}=await deferredPrompt.userChoice;
+  if(outcome==='accepted'){toast('اپ نصب شد ✓');$('pwaInstallBtn').style.display='none';}
+  deferredPrompt=null;
+}
+
+/* ===== Event bindings ===== */
+const on=(id,ev,fn)=>{const el=$(id);if(el)el.addEventListener(ev,fn);};
+
+on('lessonForm','submit',e=>{e.preventDefault();generate();});
+on('printBtn','click',printPlan);on('toolbarPrint','click',printPlan);
+on('wordBtn','click',exportWord);
+on('shareBtn','click',sharePlan);
+on('copyBtn','click',copyText);on('toolbarCopy','click',copyText);
+on('saveBankBtn','click',savePlan);on('toolbarSave','click',savePlan);
+on('clearBtn','click',clearForm);on('clearBankBtn','click',clearBank);
+on('saveCreator','click',saveCreator);
+on('saveProfileBtn','click',saveProfile);on('clearProfilesBtn','click',clearProfiles);
+on('darkToggle','click',()=>setDark(!isDark()));
+on('timerStartPause','click',startPauseTimer);on('timerReset','click',resetTimer);
+on('exportBackupBtn','click',exportBackup);
+on('importBackupBtn','click',()=>{const f=$('backupFile');if(f){f.value='';f.click();}});
+on('backupFile','change',function(){if(this.files?.[0])importBackup(this.files[0]);});
+on('dlClose','click',closeDlModal);on('dlCloseBtn','click',closeDlModal);
+on('dlCopy','click',()=>{const c=$('dlContent');c.select();c.setSelectionRange(0,999999);const done=()=>toast('کپی شد ✓');if(navigator.clipboard?.writeText)navigator.clipboard.writeText(c.value).then(done);else{try{document.execCommand('copy');done();}catch(e){toast('خطا');}}});
+on('aiBtn','click',openAIModal);
+on('aiClose','click',closeAIModal);on('aiCloseBtn','click',closeAIModal);
+on('aiCallBtn','click',callAI);
+on('aiApplyBtn','click',applyAIResult);
+on('aiCopyPromptBtn','click',()=>{const t=$('aiPrompt').value;const done=()=>toast('پرامپت کپی شد ✓');if(navigator.clipboard?.writeText)navigator.clipboard.writeText(t).then(done);else{const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();document.execCommand('copy');document.body.removeChild(a);done();}});
+on('saveAiKey','click',()=>{const k=norm($('aiKey')?.value);if(!k){toast('کلید خالی است.');return;}safeSet(AIKEY_KEY,k);toast('کلید ذخیره شد ✓');});
+on('clearAiKey','click',()=>{safeSet(AIKEY_KEY,null);if($('aiKey'))$('aiKey').value='';toast('کلید حذف شد.');});
+on('pwaInstallBtn','click',installPWA);
+
+$('dlModal').addEventListener('click',e=>{if(e.target===$('dlModal'))closeDlModal();});
+$('aiModal').addEventListener('click',e=>{if(e.target===$('aiModal'))closeAIModal();});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){closeDlModal();closeAIModal();}
+  if((e.ctrlKey||e.metaKey)&&e.key==='s'){e.preventDefault();savePlan();}
+  if((e.ctrlKey||e.metaKey)&&e.key==='p'){/* let browser handle */}
+});
+
+on('creatorName','keydown',e=>{if(e.key==='Enter'){e.preventDefault();saveCreator();}});
+on('topic','keydown',e=>{if(e.key==='Enter'){e.preventDefault();generate();}});
+on('duration','blur',function(){const v=parseInt(this.value,10);if(!isNaN(v))this.value=Math.max(20,Math.min(240,v));updateTimerUI();});
+on('sessions','blur',function(){const v=parseInt(this.value,10);if(!isNaN(v))this.value=Math.max(1,Math.min(10,v));});
+on('theme','change',function(){applyTheme(this.value);});
+on('subject','change',function(){const c=$('subjectCustom');if(!c)return;if(this.value==='__custom__'){c.style.display='block';c.focus();}else{c.style.display='none';c.value='';}});
+on('grade','change',function(){const c=$('gradeCustom');if(!c)return;if(this.value==='__custom__'){c.style.display='block';c.focus();}else{c.style.display='none';c.value='';}});
+
+document.querySelectorAll('.tpl-btn').forEach(b=>b.addEventListener('click',()=>applyTemplate(b.dataset.tpl)));
+
+/* autosave listeners */
+['subject','grade','topic','duration','date','students','sessions','teacher','school','approach','theme','materials','prior','notes','subjectCustom','gradeCustom'].forEach(id=>{
+  const el=$(id);if(el){el.addEventListener('input',scheduleAutosave);el.addEventListener('change',scheduleAutosave);}
+});
+
+/* ===== Init ===== */
+setDark(isDark());
+updateCreatorUI();
+renderBank();
+renderProfiles();
+checkShareLink();
+restoreAutosave();
+updateTimerUI();
+
+/* ===== Service Worker Registration ===== */
+if('serviceWorker' in navigator){
+  window.addEventListener('load',()=>{
+    navigator.serviceWorker.register('sw.js').catch(err=>console.info('SW:',err));
+  });
+}
+</script>
+</body>
+</html>
